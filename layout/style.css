@@ -1,0 +1,264 @@
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, audio, canvas, details, figcaption,
+figure, footer, header, hgroup, mark, menu, meter, nav,
+output, progress, section, summary, time, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-family: ff-tundra-web-pro, Georgia, Times, 'Times New Roman', serif;
+  font-size: 100%;
+  vertical-align: baseline; }
+body {
+  line-height: 1; }
+
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section, blockquote {
+  display: block; }
+
+nav ul {
+  list-style: none; }
+
+ol {
+  list-style: decimal;
+  padding-left: 40px; }
+
+ul {
+  list-style: disc;
+  padding-left: 40px; }
+
+ul ul {
+  list-style: circle; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+ins {
+  text-decoration: underline; }
+
+del {
+  text-decoration: line-through; }
+
+mark {
+  background: none; }
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted #000;
+  cursor: help; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+input, select, a img {
+  vertical-align: middle; }
+
+body, html {
+  width: 100%;
+  height: 100%; }
+
+@font-face{font-family:'ys-webfont';src:url('../webfonts/ys-webfont.eot');src:url('../webfonts/ys-webfont.eot?#iefix') format('embedded-opentype'),url('../webfonts/ys-webfont.woff') format('woff'),url('../webfonts/ys-webfont.ttf') format('truetype'),url('../webfonts/ys-webfont.svg#ys-webfont') format('svg');}
+
+
+
+
+
+
+
+body, input, textarea, button{
+  font-size: 125%;
+  line-height: 1.5;
+  font-family: "ff-tundra-web-pro",Georgia,Times,"Times New Roman",serif;
+  color: #424242;
+}
+
+.wrapper{
+  width: 100%;
+  /*height: 500px;*/
+  position: absolute;
+  top: 50%;
+  margin-top: -320px;
+}
+
+.gallery{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-weight: lighter;
+}
+
+.page{
+  margin: 204px auto 0;
+  width: 100%;
+}
+
+.page.page-one,
+.page.page-idl{
+  margin: 125px auto 0;
+}
+
+.page.page-six,
+.page.page-seven{
+  margin: 160px auto 0;
+}
+
+.page.page-twelve-babys,
+.page.page-dc-heros{
+  margin: 116px auto 0;
+}
+
+
+.page .content-inner{
+  max-width: 496px;
+  margin: 0 auto;
+}
+
+.page.page-one .content-inner,
+.page.page-two .content-inner,
+.page.page-five .content-inner{
+  max-width: 400px;
+}
+
+.page-four .content-inner{
+  max-width: 470px;
+}
+
+.page-seven .content-inner{
+  max-width: 412px;
+}
+
+/*链接*/
+.inner-link{
+  color: #B8B8B8;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.inner-link.big{
+  color: #00cccc;
+}
+
+.inner-link:hover{
+  text-decoration: underline;
+}
+
+.quiz{
+  padding: 0 1px;
+  font-size: 0.700em;
+  color: #00cccc;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.quiz:hover{
+  background: rgba(0, 204, 204, 0.18);
+}
+
+h1,h2,h3,h4,p{
+  font-weight: lighter;
+  line-height: 1.3;
+}
+
+h1{
+  font-size: 5.000em;
+  line-height: 0.9;
+}
+
+h2{
+  font-size: 2.000em;
+}
+
+h3{
+  font-size: 1.250em;
+}
+
+p{
+  font-size: 1.000em;
+}
+
+.big{
+  font-size: 1.3em;
+  line-height: 1.5;
+}
+
+.page .content-inner img{
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.page .content-inner img:hover{
+  /*box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 15px -3px;*/
+  -webkit-transform: translate3d(0,-20px,0);
+  -moz-transform: translate3d(0,-20px,0);
+  -o-transform: translate3d(0,-20px,0);
+  -ms-transform: translate3d(0,-20px,0);
+  transform: translate3d(0,-20px,0);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 18px 28px -3px;
+}
+
+.page-two h3{
+  font-size: 1.350em;
+  line-height: 1.4;
+}
+
+.page.page-twelve-babys .content-inner{
+  max-width: 1025px;
+}
+
+.page.page-twelve-babys .content-inner img{
+  height: 400px;
+  display: inline-block;
+}
+
+.page.page-dc-heros .content-inner{
+  max-width: 1025px;
+}
+
+.page.page-dc-heros .content-inner img{
+  height: 380px;
+  display: inline-block;
+}
+
+.page.page-idl .content-inner{
+  max-width: 1025px;
+}
+
+.page.page-idl .content-inner img{
+  height: 300px;
+  display: inline-block;
+}
+
+.page.page-contact .content-inner{
+  max-width: 300px;
+}
+
+/*不断变化的habbit*/
+.page-one .new{
+  background: #424242;
+  color: #5CEFEF;
+  padding: 4px 5px;
+}
+
+.page-one .old{
+  background: #424242;
+  color: #00cccc;
+  padding: 4px 5px;
+}
