@@ -1,0 +1,130 @@
+/*头部 开始*/
+.nav{
+    border-bottom: thin solid #D2D2D2;
+    margin: 0 20px;
+    font-size: 16px;
+}
+
+.nav .left-side{
+    display: inline-block;
+    margin: 14px 0px;
+}
+
+.left-side .item{
+    position: relative;
+    color: #100F17;
+    padding: 0 20px;
+}
+
+.left-side .item::after{
+    content: '';
+    position: absolute;
+    padding-left: 4px;
+    opacity: .2;
+}
+
+.left-side .item:hover::after{
+    content: '/#';
+}
+
+.left-side.blog-active .item.blog::after,
+.left-side.me-active .item.me::after,
+.left-side.exp-active .item.exp::after{
+    content: '/#';
+}
+
+.left-side.blog-active .item.blog:hover::after,
+.left-side.me-active .item.me:hover::after,
+.left-side.exp-active .item.exp:hover::after{
+    opacity: .5;
+}
+
+.nav .right-side{
+    display: inline-block;
+    float: right;
+    margin: 14px 0px 14px 20px;
+    font-family: STZhongsong;
+}
+
+.right-side .old-text{
+    opacity: .5;
+}
+
+
+
+/*头部 结束*/
+
+
+/*内容 开始*/
+.content-wrapper{
+    padding: 10px 20px;
+}
+
+/*ME 开始*/
+.me-wrapper .intro-wrapper,
+.me-wrapper .contact-wrapper{
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 28px;
+}
+
+.intro-wrapper{
+    position: relative;
+    height: 400px;
+    padding-right: 40px;
+}
+
+.intro-wrapper .di-line{
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 1px;
+    height: 240px;
+    background: #979797;
+
+}
+
+.contact-wrapper{
+    margin-left: 40px;
+}
+
+.contact-wrapper .title{
+    font-family: STZhongsong;
+    font-size: 60px;
+    margin-top: -14px;
+    opacity: .4;
+    line-height: 1;
+}
+
+.info .avatar{
+    float: left;
+    height: 36px;
+    width: 36px;
+    margin-top: 6px;
+    margin-right: 10px;
+    border: 1px solid #979797;
+    border-radius: 50%;
+    background: #F3F3F3;
+
+}
+
+
+/*ME 结束*/
+
+
+
+/*内容 结束*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
