@@ -10,8 +10,9 @@ var JSXSRC = [
     "./components/blog.js",
     "./components/blogContent.js",
     "./components/meContent.js",
+    "./components/detailShowConArea.js",
     "./components/expContent.js",
-    "./components/main.js"
+    "./components/container.js"
 ]
 
 gulp.task('jsx', function(){
@@ -20,3 +21,5 @@ gulp.task('jsx', function(){
         .pipe(react())
         .pipe(gulp.dest('./'));
 });
+
+gulp.task('default', ['jsx']);

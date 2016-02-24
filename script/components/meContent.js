@@ -10,7 +10,7 @@ var MeContent = React.createClass({
                 {/*个人信息*/}
                 <div className="info">
                     <div className="avatar"></div>
-                    <p>Hugo Tam,对此人收集的情报还十分有限。</p>
+                    <p>Hugo Tam, 对此人收集的情报还十分有限。</p>
                     <span>(谭什么)</span>
                 </div>
                 {/*经历*/}

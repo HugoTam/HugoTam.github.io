@@ -72,37 +72,28 @@ var Header = React.createClass({
 
     handleClickBlog: function(){
         this.props.handleView("blog");
-        this.setState({activeItem: "blog"});
         console.log("blog");
     },
 
     handleClickExp: function(){
         this.props.handleView("exp");
-        this.setState({activeItem: "exp"});
         console.log("exp");
 
     },
 
     handleClickMe: function(){
         this.props.handleView("me");
-        this.setState({activeItem: "me"});
         console.log("me")
 
-    },
-
-    getInitialState: function(){
-        return{
-            activeItem: "me"
-        };
     },
 
     render: function(){
         return(
             <div className="nav">
-                <div className={"left-side "+this.state.activeItem+"-active"}>
+                <div className={"left-side "+this.props.activeView+"-active"}>
                     <a href="#" className="item blog" onClick={this.handleClickBlog}><span>BLOG</span></a>
                     <a href="#" className="item exp" onClick={this.handleClickExp}><span>EXP</span></a>
-                    <a href="#" className="item me" onClick={this.handleClickMe}><span>ME</span></a>
+                    <a href="#me" className="item me" onClick={this.handleClickMe}><span>ME</span></a>
                 </div>
                 <div className="right-side">
                 <span className="des">一个

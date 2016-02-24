@@ -1,3 +1,12 @@
+a{
+    color: #100F17;
+}
+
+#container{
+    min-width: 1080px;
+    position: relative;
+}
+
 /*头部 开始*/
 .nav{
     border-bottom: thin solid #D2D2D2;
@@ -58,6 +67,7 @@
 /*内容 开始*/
 .content-wrapper{
     padding: 10px 20px;
+    position: relative;
 }
 
 /*ME 开始*/
@@ -66,11 +76,13 @@
     display: inline-block;
     vertical-align: top;
     padding-top: 28px;
+    min-width: 440px;
 }
 
 .intro-wrapper{
     position: relative;
     height: 400px;
+    padding-left: 20px;
     padding-right: 40px;
 }
 
@@ -79,9 +91,40 @@
     top: 40px;
     right: 0;
     width: 1px;
-    height: 240px;
-    background: #979797;
+    height: 200px;
+    background: #d8d8d8;
 
+}
+
+.intro-wrapper .info{
+    padding-bottom: 24px;
+    font-size: 16px;
+}
+
+.info .avatar{
+    float: left;
+    height: 40px;
+    width: 40px;
+    margin-top: 6px;
+    margin-right: 10px;
+    border: 1px solid #979797;
+    border-radius: 50%;
+    background: #F3F3F3;
+
+}
+
+.intro-wrapper .simple-exp{
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+.simple-exp .exp-time{
+    padding-right: 12px;
+}
+
+.intro-wrapper .tags{
+    font-size: 16px;
+    padding-bottom: 20px;
 }
 
 .contact-wrapper{
@@ -92,24 +135,141 @@
     font-family: STZhongsong;
     font-size: 60px;
     margin-top: -14px;
+    padding-bottom: 14px;
     opacity: .4;
     line-height: 1;
 }
 
-.info .avatar{
-    float: left;
-    height: 36px;
-    width: 36px;
-    margin-top: 6px;
-    margin-right: 10px;
-    border: 1px solid #979797;
-    border-radius: 50%;
-    background: #F3F3F3;
+.contact-list div{
+    padding-bottom: 12px;
+    font-size: 16px;
+}
+
+.contact-list .wechat span:first-child{
+    display: inline-block;
+    vertical-align: top;
+    line-height: 60px;
+}
+
+.contact-list .wechat-info{
+    display: inline-block;
+}
+
+.contact-list .wechat-info .tips{
+    display: block;
 
 }
 
 
+
 /*ME 结束*/
+
+
+/*EXP 开始*/
+
+.exp-wrapper{
+    position: relative;
+}
+
+.exp-wrapper .show-con-area{
+    display: inline-block;
+    width: 800px;
+    height: 500px;
+    margin-right: 60px;
+    background: #f0f0f0;
+}
+
+.exp-wrapper .timeline-area{
+    display: inline-block;
+    position: absolute;
+    /*top: 0px;*/
+    right: 0px;
+    width: 240px;
+    height: 500px;
+    overflow: auto;
+}
+
+.timeline-wrapper{
+    position: relative;
+}
+
+.timeline-wrapper .timeline-line{
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: #ccc;
+    left: 20px;
+}
+
+.timeline-dots-wrapper .timeline-dot{
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    min-height: 50px;
+}
+
+.timeline-dot .dot{
+    display: inline-block;
+    position: absolute;
+    background: #46454C;
+    left: 16px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.timeline-dot .dot::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #46454C;
+    opacity: .35;
+    left: 0;
+    top: 0;
+    transform: scale(1.6);
+}
+
+.timeline-dot .dot:hover::after{
+    -webkit-animation: scaleOpa 1.2s infinite ease;
+    animation: scaleOpa 1.2s infinite ease;
+}
+
+@keyframes scaleOpa {
+    0%{transform: scale(1.6);opacity: .35;}
+    100%{transform: scale(3);opacity: 0;}
+}
+
+@-webkit-keyframes scaleOpa {
+    0%{-webkit-transform: scale(1.6);opacity: .35;}
+    100%{-webkit-transform: scale(3);opacity: 0;}
+}
+
+.timeline-dot .dot-intro{
+    position: absolute;
+    text-align: left;
+    left: 44px;
+    top: -6px;
+}
+
+.timeline-dot .dot-time{
+
+}
+
+.timeline-dot .dot-title{
+    font-size: 12px;
+    color: #A0A0A3;
+    width: 116px;
+}
+
+
+
+
+
+/*EXP 结束*/
 
 
 
