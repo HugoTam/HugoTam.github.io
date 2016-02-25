@@ -59,7 +59,10 @@ var ShowConArea = React.createClass({
                         <a href="#" className="key t1">湖南工业大学</a>
                         <a href="#" className="key t2">包装工程</a>
                         <a href="#" className="key t3">皇牌专业</a>
-                        <a href="#" className="key t4">盒子</a>
+                        <a href="#" className="key t4">
+                            <span className="box1">盒子</span>
+                            <span className="box2">盒子</span>
+                        </a>
                         <a href="#" className="key t5">工厂</a>
                         <a href="#" className="key t6">
                             <span className="words">流水线</span>
