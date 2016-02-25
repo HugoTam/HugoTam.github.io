@@ -12,12 +12,12 @@ ME.timeLineArea = [{
     dec: ""
 },{
     itemName: "blue apple",
-    title: "加入<br />“蓝苹果”社团",
+    title: "加入<br />蓝苹果社团",
     time: "2012-10",
     dec: ""
 },{
     itemName: "DMA",
-    title: "变更专业<br />“数字媒体艺术",
+    title: "变更专业<br />数字媒体艺术",
     time: "2013-06”",
     dec: ""
 },{
@@ -107,13 +107,19 @@ var ExpContent = React.createClass({
         this.setState({showConEvent: itemName});
     },
 
+    handleActiveCon: function(){
+
+    },
+
     render: function(){
         return <div className="exp-wrapper">
             {/*内容显示区域*/}
             <div className="show-con-area">
                 <ShowConArea
                     event={this.state.showConEvent}
+                    dotActive={this.handleActiveCon}
                 />
+                <div className="di-line"></div>
             </div>
             {/*时间线*/}
             <TimeLineArea

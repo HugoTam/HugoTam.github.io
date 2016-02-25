@@ -172,11 +172,21 @@ a{
 }
 
 .exp-wrapper .show-con-area{
+    position: relative;
     display: inline-block;
     width: 800px;
     height: 500px;
     margin-right: 60px;
-    background: #f0f0f0;
+    /*background: #f0f0f0;*/
+}
+
+.show-con-area .di-line{
+    position: absolute;
+    top: 40px;
+    right: -40px;
+    width: 1px;
+    height: 420px;
+    background: #d8d8d8;
 }
 
 .exp-wrapper .timeline-area{
@@ -267,7 +277,281 @@ a{
 
 
 
+/*EXP detail start*/
+.show-con-wrapper .keys{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
 
+
+
+
+
+/*---------EXP01-HUT--------*/
+.show-con-wrapper.event-HUT .keys{
+    width: 360px;
+    height: 240px;
+    margin-left: -180px;
+    margin-top: -120px;
+}
+
+.keys .key{
+    position: absolute;
+
+    /*-webkit-transform: translate(-50%, -50%);*/
+    /*transform: translate(-50%, -50%);*/
+
+    opacity: 0;
+}
+
+.keys .key.show{
+    opacity: 1;
+    transition: opacity .6s, transform .4s ease-out;
+}
+
+/*好像好麻烦的方法？*/
+.event-HUT .key.show{
+    animation: float 8s infinite linear;
+}
+
+.event-HUT .key.show:hover{
+    transform: translate(0,-1px);
+    animation: none;
+}
+
+@keyframes float {
+    0%,100%{transform: translate(0,0px);}
+    33.3%{transform: translate(0,5px);}
+    66.6%{transform: translate(0,-5px);}
+}
+
+.event-HUT .key.t1{
+    font-size: 28px;
+    top: 92px;
+    left: 86px;
+}
+
+
+.event-HUT .key.t1:hover::after{
+    opacity: .8;
+}
+
+.event-HUT .key.t1:active::after{
+    opacity: .5;
+}
+
+.event-HUT .key.t1::after{
+    content: '可能是湖南最好的二本大学';
+    position: absolute;
+    top: 34px;
+    left: 10px;
+    font-size: 12px;
+    opacity: 0;
+    color: #00cccc;
+    transition: opacity .3s;
+}
+
+.event-HUT .key.t1.show{
+    opacity: .9;
+}
+
+.event-HUT .key.t2{
+    font-size: 16px;
+    top: 54px;
+    left: 240px;
+}
+
+.event-HUT .key.t2.show{
+    opacity: .8;
+}
+
+.event-HUT .key.t3{
+    font-size: 16px;
+    top: 142px;
+    left: 40px;
+}
+
+.event-HUT .key.t3.show{
+    opacity: .8;
+}
+
+.event-HUT .key.t4{
+    font-size: 22px;
+    top: 66px;
+    left: 40px;
+}
+
+.event-HUT .key.t4.show{
+    opacity: .7;
+}
+
+.event-HUT .key.t5{
+    font-size: 22px;
+    top: 146px;
+    left: 238px;
+}
+
+.event-HUT .key.t5.show{
+    opacity: .7;
+}
+
+.event-HUT .key.t6{
+    font-size: 22px;
+    top: 44px;
+    left: 104px;
+}
+
+.event-HUT .key.t6.show{
+    opacity: .7;
+}
+
+.event-HUT .key.t6 .words{
+
+}
+
+.event-HUT .key.t6 .word{
+    position: absolute;
+    top: 0;
+}
+
+
+/*流水线*/
+.event-HUT .key.t6 .w1{
+    left: 0;
+}
+
+.event-HUT .key.t6 .w2{
+    left: 22px;
+}
+
+.event-HUT .key.t6 .w3{
+    left: 44px;
+}
+
+.event-HUT .key.t6:hover .w1{
+    animation: liu 2.4s infinite linear;
+}
+
+.event-HUT .key.t6:hover .w2{
+    animation: shui 2.4s infinite linear;
+}
+
+.event-HUT .key.t6:hover .w3{
+    animation: xian 2.4s infinite linear;
+}
+
+.event-HUT .key.t6:active .w1{
+    animation: liu 1s infinite linear;
+}
+
+.event-HUT .key.t6:active .w2{
+    animation: shui 1s infinite linear;
+}
+
+.event-HUT .key.t6:active .w3{
+    animation: xian 1s infinite linear;
+}
+
+
+
+/*流水线动画*/
+@keyframes liu {
+    0%{transform: translate(-100px,0);opacity: 0;}
+    30%{transform: translate(0,0);opacity: .8;}
+    100%{transform: translate(0,0);opacity: 0;}
+
+}
+
+@keyframes shui {
+    0%,30%{transform: translate(0,0);opacity: 1;}
+    36%{transform: translate(0,-34px);opacity: 1;color: #00cccc;}
+    50%{transform: translate(0,-34px);opacity: 1;}
+    80%{transform: translate(0,0);opacity: 0;}
+    100%{transform: translate(0,0);opacity: 1;}
+}
+
+@keyframes xian {
+    0%{transform: translate(0,0);opacity: 0;}
+    80%{transform: translate(0,0);opacity: 1;}
+    100%{transform: translate(80px,0);opacity: 0;}
+
+}
+
+
+.event-HUT .key.t7{
+    font-size: 20px;
+    top: 170px;
+    left: 106px;
+}
+
+.event-HUT .key.t7.show{
+    opacity: .5;
+}
+
+.event-HUT .key.t8{
+    font-size: 18px;
+    top: 164px;
+    left: 180px;
+}
+
+.event-HUT .key.t8.show{
+    opacity: .4;
+}
+
+.event-HUT .key.t9{
+    font-size: 16px;
+    top: 70px;
+    left: 186px;
+}
+
+.event-HUT .key.t9.show{
+    opacity: .4;
+}
+
+.event-HUT .key.t10{
+    font-size: 16px;
+    left: 146px;
+    top: 140px;
+}
+
+.event-HUT .key.t10.show{
+    opacity: .4;
+}
+
+.event-HUT .key.t11{
+    font-size: 17px;
+    top: 100px;
+    left: 284px;
+}
+
+.event-HUT .key.t11.show{
+    opacity: .3;
+}
+
+.event-HUT .key.t12{
+    font-size: 17px;
+    top: 114px;
+    left: 8px;
+}
+
+.event-HUT .key.t12.show{
+    opacity: .3;
+}
+
+.event-HUT .key.t13{
+    font-size: 17px;
+    top: 208px;
+    left: 156px;
+}
+
+.event-HUT .key.t13.show{
+    opacity: .3;
+}
+
+
+
+/*EXP detail 结束*/
 
 /*EXP 结束*/
 
