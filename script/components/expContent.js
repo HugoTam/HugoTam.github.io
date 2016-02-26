@@ -18,7 +18,7 @@ ME.timeLineArea = [{
 },{
     itemName: "DMA",
     title: "变更专业<br />数字媒体艺术",
-    time: "2013-06”",
+    time: "2013-06",
     dec: ""
 },{
     itemName: "IDL",

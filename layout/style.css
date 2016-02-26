@@ -299,14 +299,12 @@ a{
 .keys .key{
     position: absolute;
 
-    /*-webkit-transform: translate(-50%, -50%);*/
-    /*transform: translate(-50%, -50%);*/
-
     opacity: 0;
 }
 
 .keys .key.show{
     opacity: 1;
+    -webkit-transition: opacity .6s, -webkit-transform .4s ease-out;
     transition: opacity .6s, transform .4s ease-out;
 }
 
@@ -315,10 +313,10 @@ a{
     animation: float 8s infinite linear;
 }
 
-.event-HUT .key.show:hover{
-    transform: translate(0,-1px);
-    animation: none;
-}
+/*.event-HUT .key.show:hover{*/
+    /*animation: none;*/
+    /*transform: translate(0,-1px);*/
+/*}*/
 
 @keyframes float {
     0%,100%{transform: translate(0,0px);}
@@ -523,15 +521,37 @@ a{
 
 }
 
-
+/*迷茫 点击效果*/
 .event-HUT .key.t7{
     font-size: 20px;
     top: 170px;
     left: 106px;
 }
 
+.event-HUT .key.t7:hover{
+    text-shadow: 0 2px 20px rgba(0,0,0,.8);
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+}
+
 .event-HUT .key.t7.show{
     opacity: .5;
+}
+
+/*迷茫 点击效果*/
+.event-HUT .keys.keyactive-confuse .key{
+    -webkit-animation: none;
+    animation: none;
+    -webkit-filter: blur(1.2px);
+    filter: blur(1.2px);
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+}
+
+.event-HUT .keys.keyactive-confuse .key.t7{
+    -webkit-filter: none;
+    filter: none;
+    text-shadow: none;
 }
 
 .event-HUT .key.t8{
@@ -544,10 +564,83 @@ a{
     opacity: .4;
 }
 
+.event-HUT .key.t8:hover{
+    /*transition: transform .3s;*/
+    /*transform: scale3d(.4,.4,1);*/
+    /*-webkit-transform-style: preserve-3d;*/
+    -webkit-animation: becomeSmall .3s forwards;
+    animation: becomeSmall .3s forwards;
+}
+
+@-webkit-keyframes becomeSmall {
+    0%{-webkit-transform: scale(1);}
+    100%{-webkit-transform: scale(.6);}
+}
+
+@keyframes becomeSmall {
+    0%{transform: scale(1);}
+    100%{transform: scale(.6);}
+}
+
+/*孤独 点击效果*/
+.event-HUT .keys.keyactive-lonely .key{
+    -webkit-animation: becomeSmall .3s forwards;
+    animation: becomeSmall .3s forwards;
+}
+
+.event-HUT .keys.keyactive-lonely .key.t8:active{
+    -webkit-animation: becomeBig .5s forwards;
+    animation: becomeBig .5s forwards;
+}
+
+@-webkit-keyframes becomeBig {
+    0%{-webkit-transform: scale3d(1,1,1);}
+    100%{-webkit-transform: scale3d(10,10,1);}
+}
+
+@keyframes becomeBig {
+    0%{transform: scale3d(1,1,1);}
+    100%{transform: scale3d(10,10,1);}
+}
+
 .event-HUT .key.t9{
     font-size: 16px;
     top: 70px;
     left: 186px;
+}
+
+.event-HUT .key.t9::after,
+.event-HUT .key.t10::after{
+    position: absolute;
+    transition: opacity .3s;
+    opacity: 0;
+    font-size: 12px;
+}
+
+.event-HUT .key.t9::after{
+    content: '为了部落';
+    width: 48px;
+    top: 3px;
+    left: -3px;
+}
+
+.event-HUT .key.t10::after{
+    content: '青铜五选手';
+    width: 60px;
+    top: 3px;
+    left: -12px;
+}
+
+
+.event-HUT .key.t9.show:hover,
+.event-HUT .key.t10.show:hover{
+    color: rgba(0,0,0,0);
+}
+
+.event-HUT .key.t9.show:hover::after,
+.event-HUT .key.t10.show:hover::after{
+    color: #100F17;
+    opacity: 1;
 }
 
 .event-HUT .key.t9.show{
@@ -574,10 +667,65 @@ a{
     opacity: .3;
 }
 
+.event-HUT .key.t11:hover{
+    color: rgba(0,0,0,0);
+}
+
+.event-HUT .key.t11:hover::before{
+    content: '我是一名大学生了!!!';
+    position: absolute;
+    top: 6px;
+    left: -6px;
+    font-size: 12px;
+    line-height: 12px;
+    width: 132px;
+    color: #100F17;
+}
+
+.event-HUT .keys.keyactive-universityStudent .key.t11::before{
+    content: '哦，';
+    font-size: 42px;
+}
+
+
+.event-HUT .keys.keyactive-universityStudent .key::before{
+    content: '我也是大学生';
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    font-size: 16px;
+    line-height: 18px;
+    width: 54px;
+    color: #100F17;
+}
+
+.event-HUT .keys.keyactive-universityStudent .key{
+    color: rgba(0,0,0,0);
+}
+
 .event-HUT .key.t12{
     font-size: 17px;
     top: 114px;
     left: 8px;
+}
+
+.event-HUT .key.t12:hover{
+    cursor: not-allowed;
+}
+
+.event-HUT .key.t12:active{
+    -webkit-animation: shock .3s;
+    animation: shock .3s;
+}
+
+@-webkit-keyframes shock {
+    0%,40%,80%{-webkit-transform: translate(-4px,0);}
+    20%,60%,100%{-webkit-transform: translate(4px,0);}
+}
+
+@keyframes shock {
+    0%,40%,80%{transform: translate(-4px,0);}
+    20%,60%,100%{transform: translate(4px,0);}
 }
 
 .event-HUT .key.t12.show{

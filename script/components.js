@@ -185,7 +185,8 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
     getInitialState: function() {
         return {
-            active: false
+            active: false,
+            keyActive: "",
         }
 
     },
@@ -225,8 +226,22 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
     },
 
     handleCancelKeyActive: function(){
-        console.log("cancel success");
+        var keys = ReactDOM.findDOMNode(this.refs.keys);
+
+        $(keys).removeClass("keyactive-"+this.state.keyActive);
+        this.setState({keyActive: ""});
     },
+
+    handleKeyActive: function(key){
+        var _this = this;
+        var keys = ReactDOM.findDOMNode(this.refs.keys);
+
+        this.setState({keyActive: key});
+        $(keys).addClass("keyactive-"+key);
+
+
+    },
+
 
     render: function(){
         var _this = this;
@@ -234,10 +249,10 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
         switch(_this.props.event){
             case "HUT":
                 var con = React.createElement("div", {className: "key-wrapper"}, 
-                    React.createElement("div", {className: "keys", onMouseLeave: this.handleCancelKeyActive}, 
+                    React.createElement("div", {ref: "keys", className: "keys", onMouseUp: _this.handleCancelKeyActive, onMouseLeave: _this.handleCancelKeyActive}, 
                         React.createElement("a", {href: "#", className: "key t1"}, "湖南工业大学"), 
                         React.createElement("a", {href: "#", className: "key t2"}, "包装工程"), 
-                        React.createElement("a", {href: "#", className: "key t3"}, "皇牌专业"), 
+                        React.createElement("a", {href: "#", className: "key t3", onMouseDown: _this.handleKeyActive.bind(null,"bestMajor")}, "皇牌专业"), 
                         React.createElement("a", {href: "#", className: "key t4"}, 
                             React.createElement("span", {className: "box1"}, "盒子"), 
                             React.createElement("span", {className: "box2"}, "盒子")
@@ -247,11 +262,11 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
                             React.createElement("span", {className: "words"}, "流水线"), 
                             React.createElement("span", {className: "word w1"}, "流"), React.createElement("span", {className: "word w2"}, "水"), React.createElement("span", {className: "word w3"}, "线")
                         ), 
-                        React.createElement("a", {href: "#", className: "key t7"}, "迷茫"), 
-                        React.createElement("a", {href: "#", className: "key t8"}, "孤独"), 
+                        React.createElement("a", {href: "#", className: "key t7", onMouseDown: _this.handleKeyActive.bind(null,"confuse")}, "迷茫"), 
+                        React.createElement("a", {href: "#", className: "key t8", onMouseDown: _this.handleKeyActive.bind(null,"lonely")}, "孤独"), 
                         React.createElement("a", {href: "#", className: "key t9"}, "WOW"), 
                         React.createElement("a", {href: "#", className: "key t10"}, "LOL"), 
-                        React.createElement("a", {href: "#", className: "key t11"}, "大学生"), 
+                        React.createElement("a", {href: "#", className: "key t11", onMouseDown: _this.handleKeyActive.bind(null,"universityStudent")}, "大学生"), 
                         React.createElement("a", {href: "#", className: "key t12"}, "考研"), 
                         React.createElement("a", {href: "#", className: "key t13"}, "恐惧")
                     )
@@ -292,7 +307,7 @@ ME.timeLineArea = [{
 },{
     itemName: "DMA",
     title: "变更专业<br />数字媒体艺术",
-    time: "2013-06”",
+    time: "2013-06",
     dec: ""
 },{
     itemName: "IDL",
