@@ -213,7 +213,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
                 var delayTime = i+1;
 
-                var delayUnit = 50;
+                var delayUnit = 1000;
 
 
 
