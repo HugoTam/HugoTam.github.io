@@ -405,10 +405,12 @@ a{
 }
 
 .event-HUT .key.t4:active .box1{
+    -webkit-animation: openBox .3s infinite;
     animation: openBox .3s infinite;
 }
 
 .event-HUT .key.t4:active .box2{
+    -webkit-animation: openBoxCopy .3s infinite;
     animation: openBoxCopy .3s infinite;
 }
 
@@ -423,6 +425,17 @@ a{
     100%{transform: rotate(-67deg) scale(1.1);opacity: 0;}
 }
 
+@-webkit-keyframes openBoxCopy {
+    0%{-webkit-transform: scale(.2); opacity: 0;-webkit-transform-origin: 50% 100%;}
+    100%{-webkit-transform: scale(1);opacity: 1;-webkit-transform-origin: 50% 100%;}
+}
+
+
+@-webkit-keyframes openBox {
+    0%{-webkit-transform: rotate(0deg);}
+    100%{-webkit-transform: rotate(-67deg) scale(1.1);opacity: 0;}
+}
+
 
 
 .event-HUT .key.t4.show{
@@ -435,9 +448,68 @@ a{
     left: 238px;
 }
 
+.event-HUT .key.t5:hover{
+    -webkit-animation: shock2 1s infinite;
+    animation: shock2 1s infinite;
+}
+
 .event-HUT .key.t5.show{
     opacity: .7;
 }
+
+.event-HUT .key.t5:hover::after{
+    content: "工";
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-animation: hammer 1s infinite ease-in;
+    animation: hammer 1s infinite ease-in;
+}
+
+.event-HUT .key.t5:active{
+    -webkit-animation: shock2 .6s infinite;
+    animation: shock2 .6s infinite;
+}
+
+/*.event-HUT .key.t5:active::after{*/
+    /*-webkit-animation: hammer .3s infinite ease-in;*/
+    /*animation: hammer .3s infinite ease-in;*/
+/*}*/
+
+@-webkit-keyframes hammer {
+    0%{-webkit-transform: translate(0,-20px);opacity: 0;}
+    60%{-webkit-transform: translate(0,-22px);opacity: 0.8;}
+    80%{-webkit-transform: translate(0,0); opacity: 1;}
+    100%{-webkit-transform: translate(0,0); opacity: 1;}
+}
+
+@-webkit-keyframes shock2{
+    0%{-webkit-transform: rotate(0deg);}
+    79%{-webkit-transform: rotate(0deg);}
+    86%{-webkit-transform: rotate(12deg);-webkit-transform-origin: 0% 100%;}
+    93%{-webkit-transform: rotate(0deg);-webkit-transform-origin: 0% 100%;}
+    100%{-webkit-transform: rotate(-12deg);-webkit-transform-origin: 0% 100%;}
+
+
+}
+
+@keyframes hammer {
+    0%{transform: translate(0,-20px);opacity: 0;}
+    60%{transform: translate(0,-22px);opacity: 0.8;}
+    80%{transform: translate(0,0); opacity: 1;}
+    100%{transform: translate(0,0); opacity: 1;}
+}
+
+@keyframes shock2{
+    0%{transform: rotate(0deg);}
+    79%{transform: rotate(0deg);}
+    86%{transform: rotate(12deg);transform-origin: 0% 100%;}
+    93%{transform: rotate(0deg);transform-origin: 0% 100%;}
+    100%{transform: rotate(-12deg);transform-origin: 0% 100%;}
+
+}
+
+
 
 .event-HUT .key.t6{
     font-size: 22px;
@@ -641,6 +713,16 @@ a{
 .event-HUT .key.t10.show:hover::after{
     color: #100F17;
     opacity: 1;
+}
+
+.event-HUT .key.t9.show:active::after{
+    content: '已经AFK';
+    left: 0px;
+}
+
+.event-HUT .key.t10.show:active::after{
+    content: '网瘾少年';
+    left: -10px;
 }
 
 .event-HUT .key.t9.show{
