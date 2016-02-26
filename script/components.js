@@ -213,7 +213,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
                 var delayTime = i+1;
 
-                var delayUnit = 1000;
+                var delayUnit = 50;
 
 
 
@@ -251,7 +251,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
                 var con = React.createElement("div", {className: "key-wrapper"}, 
                     React.createElement("div", {ref: "keys", className: "keys", onMouseUp: _this.handleCancelKeyActive, onMouseLeave: _this.handleCancelKeyActive}, 
                         React.createElement("a", {href: "#", className: "key t1"}, "湖南工业大学"), 
-                        React.createElement("a", {href: "#", className: "key t2"}, "包装工程"), 
+                        React.createElement("a", {href: "#", className: "key t2 ", onMouseDown: _this.handleKeyActive.bind(null,"packagingEngineering")}, "包装工程"), 
                         React.createElement("a", {href: "#", className: "key t3", onMouseDown: _this.handleKeyActive.bind(null,"bestMajor")}, "皇牌专业"), 
                         React.createElement("a", {href: "#", className: "key t4"}, 
                             React.createElement("span", {className: "box1"}, "盒子"), 

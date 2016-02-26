@@ -34,7 +34,7 @@ var ShowConArea = React.createClass({
 
                 var delayTime = i+1;
 
-                var delayUnit = 1000;
+                var delayUnit = 50;
 
 
 
@@ -72,7 +72,7 @@ var ShowConArea = React.createClass({
                 var con = <div className="key-wrapper">
                     <div ref="keys" className="keys" onMouseUp={_this.handleCancelKeyActive} onMouseLeave={_this.handleCancelKeyActive}>
                         <a href="#" className="key t1">湖南工业大学</a>
-                        <a href="#" className="key t2">包装工程</a>
+                        <a href="#" className="key t2 " onMouseDown={_this.handleKeyActive.bind(null,"packagingEngineering")}>包装工程</a>
                         <a href="#" className="key t3" onMouseDown={_this.handleKeyActive.bind(null,"bestMajor")}>皇牌专业</a>
                         <a href="#" className="key t4">
                             <span className="box1">盒子</span>

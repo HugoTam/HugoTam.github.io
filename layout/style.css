@@ -369,6 +369,17 @@ a{
     opacity: .8;
 }
 
+.event-HUT .keys.keyactive-packagingEngineering .key.show{
+    opacity: .1;
+}
+
+.event-HUT .keys.keyactive-packagingEngineering .key.t2.show,
+.event-HUT .keys.keyactive-packagingEngineering .key.t4.show,
+.event-HUT .keys.keyactive-packagingEngineering .key.t5.show,
+.event-HUT .keys.keyactive-packagingEngineering .key.t6.show{
+    opacity: 1;
+}
+
 .event-HUT .key.t3{
     font-size: 16px;
     top: 142px;
@@ -378,6 +389,21 @@ a{
 .event-HUT .key.t3.show{
     opacity: .8;
 }
+
+.event-HUT .keys.keyactive-bestMajor .key.t1.show,
+.event-HUT .keys.keyactive-bestMajor .key.t2.show,
+.event-HUT .keys.keyactive-bestMajor .key.t3.show{
+    opacity: 1;
+}
+
+.event-HUT .keys.keyactive-bestMajor .key.t2.show{
+    color: #00cccc;
+}
+
+.event-HUT .keys.keyactive-bestMajor .key.show{
+    opacity: .1;
+}
+
 
 /*盒子*/
 .event-HUT .key.t4{
@@ -393,11 +419,13 @@ a{
     position: absolute;
 }
 
-.event-HUT .key.t4:hover .box1{
+.event-HUT .key.t4:hover .box1,
+.event-HUT .keys.keyactive-packagingEngineering .key.t4.show .box1{
     animation: openBox 1s infinite;
 }
 
-.event-HUT .key.t4:hover .box2{
+.event-HUT .key.t4:hover .box2,
+.event-HUT .keys.keyactive-packagingEngineering .key.t4.show .box2{
     transform: rotate(0deg) scale(0.2);
     opacity: 0;
 
@@ -448,7 +476,8 @@ a{
     left: 238px;
 }
 
-.event-HUT .key.t5:hover{
+.event-HUT .key.t5:hover,
+.event-HUT .keys.keyactive-packagingEngineering .key.t5.show{
     -webkit-animation: shock2 1s infinite;
     animation: shock2 1s infinite;
 }
@@ -457,7 +486,8 @@ a{
     opacity: .7;
 }
 
-.event-HUT .key.t5:hover::after{
+.event-HUT .key.t5:hover::after,
+.event-HUT .keys.keyactive-packagingEngineering .key.t5.show::after{
     content: "工";
     position: absolute;
     left: 0;
@@ -544,33 +574,64 @@ a{
     left: 44px;
 }
 
-.event-HUT .key.t6:hover .w1{
+.event-HUT .key.t6:hover .w1,
+.event-HUT .keys.keyactive-packagingEngineering .key.t6.show .w1{
+    -webkit-animation: liu 2.4s infinite linear;
     animation: liu 2.4s infinite linear;
 }
 
-.event-HUT .key.t6:hover .w2{
+.event-HUT .key.t6:hover .w2,
+.event-HUT .keys.keyactive-packagingEngineering .key.t6.show .w2{
+    -webkit-animation: shui 2.4s infinite linear;
     animation: shui 2.4s infinite linear;
 }
 
-.event-HUT .key.t6:hover .w3{
+.event-HUT .key.t6:hover .w3,
+.event-HUT .keys.keyactive-packagingEngineering .key.t6.show .w3{
+    -webkit-animation: xian 2.4s infinite linear;
     animation: xian 2.4s infinite linear;
 }
 
 .event-HUT .key.t6:active .w1{
+    -webkit-animation: liu 1s infinite linear;
     animation: liu 1s infinite linear;
 }
 
 .event-HUT .key.t6:active .w2{
+    -webkit-animation: shui 1s infinite linear;
     animation: shui 1s infinite linear;
 }
 
 .event-HUT .key.t6:active .w3{
+    -webkit-animation: xian 1s infinite linear;
     animation: xian 1s infinite linear;
 }
 
 
 
 /*流水线动画*/
+@-webkit-keyframes liu {
+    0%{-webkit-transform: translate(-100px,0);opacity: 0;}
+    30%{-webkit-transform: translate(0,0);opacity: .8;}
+    100%{-webkit-transform: translate(0,0);opacity: 0;}
+
+}
+
+@-webkit-keyframes shui {
+    0%,30%{-webkit-transform: translate(0,0);opacity: 1;}
+    36%{-webkit-transform: translate(0,-34px);opacity: 1;color: #00cccc;}
+    50%{-webkit-transform: translate(0,-34px);opacity: 1;}
+    80%{-webkit-transform: translate(0,0);opacity: 0;}
+    100%{-webkit-transform: translate(0,0);opacity: 1;}
+}
+
+@-webkit-keyframes xian {
+    0%{-webkit-transform: translate(0,0);opacity: 0;}
+    80%{-webkit-transform: translate(0,0);opacity: 1;}
+    100%{-webkit-transform: translate(80px,0);opacity: 0;}
+
+}
+
 @keyframes liu {
     0%{transform: translate(-100px,0);opacity: 0;}
     30%{transform: translate(0,0);opacity: .8;}
