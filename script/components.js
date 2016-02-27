@@ -4,7 +4,7 @@
 var Header = React.createClass({displayName: "Header",
 
     autoChangeText: function(){
-        var textArr = ["心血来潮","随心所欲","没有设计","不管交互","开心就好"];
+        var textArr = ["心血来潮","随心所欲","没有设计","不管交互","特异独行","开心就好"];
         // 现在集合的队列
         var i = 0;
         var j = 0;
@@ -135,6 +135,13 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 var MeContent = React.createClass({displayName: "MeContent",
 
     render: function(){
+        var myTags = this.props.updateMyTags.map(function(myTags,i){
+            return(
+                React.createElement("span", {key: i, className: "tag"}, "#"+myTags+" .")
+            );
+        });
+
+
         return React.createElement("div", {className: "me-wrapper"}, 
             React.createElement("div", {className: "intro-wrapper"}, 
                 /*个人信息*/
@@ -150,13 +157,7 @@ var MeContent = React.createClass({displayName: "MeContent",
                     React.createElement("p", null, React.createElement("span", {className: "exp-time"}, "2014.?? -- 2016.02"), React.createElement("a", {href: "http://quickwis.com/"}, "长沙快智OK记"), " 产品/设计/前端打杂")
                 ), 
                 /*标签*/
-                React.createElement("div", {className: "tags"}, 
-                    React.createElement("span", {className: "tag"}, "#交互设计师 ."), 
-                    React.createElement("span", {className: "tag"}, "#产品助理 ."), 
-                    React.createElement("span", {className: "tag"}, "#大四狗 ."), 
-                    React.createElement("span", {className: "tag"}, "#伪前端 ."), 
-                    React.createElement("span", {className: "tag"}, "#少说家 .")
-                ), 
+                React.createElement("div", {className: "tags"}, myTags), 
                 /*分割线*/
                 React.createElement("div", {className: "di-line"})
             ), 
@@ -239,6 +240,15 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
         this.setState({keyActive: key});
         $(keys).addClass("keyactive-"+key);
 
+        switch(key){
+            case "LOL":
+                _this.props.getMyTags("网瘾少年");
+                break;
+            case "universityStudent":
+                _this.props.getMyTags("一个大学生");
+                break;
+        }
+
 
     },
 
@@ -265,7 +275,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
                         React.createElement("a", {href: "#", className: "key t7", onMouseDown: _this.handleKeyActive.bind(null,"confuse")}, "迷茫"), 
                         React.createElement("a", {href: "#", className: "key t8", onMouseDown: _this.handleKeyActive.bind(null,"lonely")}, "孤独"), 
                         React.createElement("a", {href: "#", className: "key t9"}, "WOW"), 
-                        React.createElement("a", {href: "#", className: "key t10"}, "LOL"), 
+                        React.createElement("a", {href: "#", className: "key t10", onMouseDown: _this.handleKeyActive.bind(null,"LOL")}, "LOL"), 
                         React.createElement("a", {href: "#", className: "key t11", onMouseDown: _this.handleKeyActive.bind(null,"universityStudent")}, "大学生"), 
                         React.createElement("a", {href: "#", className: "key t12"}, "考研"), 
                         React.createElement("a", {href: "#", className: "key t13"}, "恐惧")
@@ -396,17 +406,14 @@ var ExpContent = React.createClass({displayName: "ExpContent",
         this.setState({showConEvent: itemName});
     },
 
-    handleActiveCon: function(){
-
-    },
-
     render: function(){
         return React.createElement("div", {className: "exp-wrapper"}, 
             /*内容显示区域*/
             React.createElement("div", {className: "show-con-area"}, 
                 React.createElement(ShowConArea, {
                     event: this.state.showConEvent, 
-                    dotActive: this.handleActiveCon}
+                    getSkillsTree: this.props.getSkillsTree, 
+                    getMyTags: this.props.getMyTags}
                 ), 
                 React.createElement("div", {className: "di-line"})
             ), 
@@ -497,7 +504,9 @@ var TimeLineArea = React.createClass({displayName: "TimeLineArea",
 var BlogWrapper = React.createClass({displayName: "BlogWrapper",
     getInitialState: function(){
         return {
-            view: "exp"
+            view: "exp",
+            skillsTree: [],
+            myTags: []
         }
     },
 
@@ -507,11 +516,55 @@ var BlogWrapper = React.createClass({displayName: "BlogWrapper",
         });
     },
 
+    //设置技能树- -
+    setSkillsTree: function(skill){
+        var skillsTree = this.state.skillsTree;
+        var repeatSkill = false;
+        //查下重
+        for(i=0;i<skillsTree.length;i++){
+            if(skill == skillsTree[i]){
+                //重复
+                repeatSkill = true;
+                break;
+            }
+        }
+        if(!repeatSkill){
+            skillsTree.push(skill);
+        }
+        this.setState({skillsTree: skillsTree});
+    },
+
+    //设置TAG，与上同
+    setMyTags: function(tag){
+        var myTags = this.state.myTags;
+        var repeatTags = false;
+        //查下重
+        for(i=0;i<myTags.length;i++){
+            console.log(tag);
+            console.log(myTags[i]);
+            if(tag == myTags[i]){
+                //重复
+                repeatTags = true;
+                console.log("重复了");
+                break;
+            }
+        }
+        if(!repeatTags){
+            myTags.push(tag);
+        }
+        this.setState({myTags: myTags});
+    },
+
     render: function(){
 
         return React.createElement("div", null, 
             React.createElement(Header, {activeView: this.state.view, handleView: this.setView}), 
-            React.createElement(Content, {view: this.state.view})
+            React.createElement(Content, {
+                view: this.state.view, 
+                getSkillsTree: this.setSkillsTree, 
+                getMyTags: this.setMyTags, 
+                updateMyTags: this.state.myTags}
+            )
         )
     },
 
@@ -526,11 +579,16 @@ var Content = React.createClass({displayName: "Content",
     render: function(){
         var con;
         if(this.props.view == "me"){
-            con = React.createElement(MeContent, null);
+            con = React.createElement(MeContent, {
+                updateMyTags: this.props.updateMyTags}
+                );
         }else if(this.props.view == "blog"){
             con = React.createElement(BlogContent, null);
         }else if(this.props.view == "exp"){
-            con = React.createElement(ExpContent, null);
+            con = React.createElement(ExpContent, {
+                getSkillsTree: this.props.getSkillsTree, 
+                getMyTags: this.props.getMyTags}
+                );
         }else if(this.props.view == "paper"){
             con = React.createElement(PaperContent, null);
         }

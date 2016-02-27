@@ -77,6 +77,7 @@ a{
     vertical-align: top;
     padding-top: 28px;
     min-width: 440px;
+    max-width: 520px;
 }
 
 .intro-wrapper{
@@ -123,8 +124,13 @@ a{
 }
 
 .intro-wrapper .tags{
+    width: 100%;
     font-size: 16px;
     padding-bottom: 20px;
+}
+
+.intro-wrapper .tags .tag{
+    padding-right: 10px;
 }
 
 .contact-wrapper{
@@ -497,8 +503,8 @@ a{
 }
 
 .event-HUT .key.t5:active{
-    -webkit-animation: shock2 .6s infinite;
-    animation: shock2 .6s infinite;
+    -webkit-animation: shock2 .8s infinite;
+    animation: shock2 .8s infinite;
 }
 
 /*.event-HUT .key.t5:active::after{*/
@@ -728,12 +734,12 @@ a{
 
 @-webkit-keyframes becomeBig {
     0%{-webkit-transform: scale3d(1,1,1);}
-    100%{-webkit-transform: scale3d(10,10,1);}
+    100%{-webkit-transform: scale3d(10,10,1);opacity: .9;}
 }
 
 @keyframes becomeBig {
     0%{transform: scale3d(1,1,1);}
-    100%{transform: scale3d(10,10,1);}
+    100%{transform: scale3d(10,10,1);opacity: .9;}
 }
 
 .event-HUT .key.t9{
@@ -826,7 +832,8 @@ a{
 }
 
 .event-HUT .keys.keyactive-universityStudent .key.t11::before{
-    content: '哦，';
+    content: '哦，嘻嘻';
+    width: 168px;
     font-size: 42px;
 }
 

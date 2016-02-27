@@ -4,7 +4,7 @@
 var Header = React.createClass({
 
     autoChangeText: function(){
-        var textArr = ["心血来潮","随心所欲","没有设计","不管交互","开心就好"];
+        var textArr = ["心血来潮","随心所欲","没有设计","不管交互","特异独行","开心就好"];
         // 现在集合的队列
         var i = 0;
         var j = 0;

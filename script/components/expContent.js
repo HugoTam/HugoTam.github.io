@@ -107,17 +107,14 @@ var ExpContent = React.createClass({
         this.setState({showConEvent: itemName});
     },
 
-    handleActiveCon: function(){
-
-    },
-
     render: function(){
         return <div className="exp-wrapper">
             {/*内容显示区域*/}
             <div className="show-con-area">
                 <ShowConArea
                     event={this.state.showConEvent}
-                    dotActive={this.handleActiveCon}
+                    getSkillsTree={this.props.getSkillsTree}
+                    getMyTags={this.props.getMyTags}
                 />
                 <div className="di-line"></div>
             </div>

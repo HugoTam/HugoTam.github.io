@@ -5,6 +5,13 @@
 var MeContent = React.createClass({
 
     render: function(){
+        var myTags = this.props.updateMyTags.map(function(myTags,i){
+            return(
+                <span key={i} className="tag">{"#"+myTags+" ."}</span>
+            );
+        });
+
+
         return <div className="me-wrapper">
             <div className="intro-wrapper">
                 {/*个人信息*/}
@@ -20,13 +27,7 @@ var MeContent = React.createClass({
                     <p><span className="exp-time">2014.?? -- 2016.02</span><a href="http://quickwis.com/">长沙快智OK记</a> 产品/设计/前端打杂</p>
                 </div>
                 {/*标签*/}
-                <div className="tags">
-                    <span className="tag">#交互设计师 .</span>
-                    <span className="tag">#产品助理 .</span>
-                    <span className="tag">#大四狗 .</span>
-                    <span className="tag">#伪前端 .</span>
-                    <span className="tag">#少说家 .</span>
-                </div>
+                <div className="tags">{myTags}</div>
                 {/*分割线*/}
                 <div className="di-line"></div>
             </div>

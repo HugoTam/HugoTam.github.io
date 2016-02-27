@@ -60,6 +60,15 @@ var ShowConArea = React.createClass({
         this.setState({keyActive: key});
         $(keys).addClass("keyactive-"+key);
 
+        switch(key){
+            case "LOL":
+                _this.props.getMyTags("网瘾少年");
+                break;
+            case "universityStudent":
+                _this.props.getMyTags("一个大学生");
+                break;
+        }
+
 
     },
 
@@ -86,7 +95,7 @@ var ShowConArea = React.createClass({
                         <a href="#" className="key t7" onMouseDown={_this.handleKeyActive.bind(null,"confuse")}>迷茫</a>
                         <a href="#" className="key t8" onMouseDown={_this.handleKeyActive.bind(null,"lonely")}>孤独</a>
                         <a href="#" className="key t9">WOW</a>
-                        <a href="#" className="key t10">LOL</a>
+                        <a href="#" className="key t10" onMouseDown={_this.handleKeyActive.bind(null,"LOL")}>LOL</a>
                         <a href="#" className="key t11" onMouseDown={_this.handleKeyActive.bind(null,"universityStudent")}>大学生</a>
                         <a href="#" className="key t12">考研</a>
                         <a href="#" className="key t13">恐惧</a>
