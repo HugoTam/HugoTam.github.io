@@ -6,7 +6,7 @@
 var BlogWrapper = React.createClass({
     getInitialState: function(){
         return {
-            view: "exp",
+            view: "blog",
             skillsTree: [],
             myTags: []
         }
@@ -60,7 +60,10 @@ var BlogWrapper = React.createClass({
     render: function(){
 
         return <div>
-            <Header activeView={this.state.view} handleView={this.setView}></Header>
+            <Header
+                activeView={this.state.view}
+                handleView={this.setView}
+            ></Header>
             <Content
                 view={this.state.view}
                 getSkillsTree={this.setSkillsTree}
@@ -78,6 +81,7 @@ var BlogWrapper = React.createClass({
 //内容容器
 var Content = React.createClass({
 
+
     render: function(){
         var con;
         if(this.props.view == "me"){
@@ -91,8 +95,6 @@ var Content = React.createClass({
                 getSkillsTree={this.props.getSkillsTree}
                 getMyTags={this.props.getMyTags}
                 />;
-        }else if(this.props.view == "paper"){
-            con = <PaperContent />;
         }
 
         return <div className="content-wrapper">

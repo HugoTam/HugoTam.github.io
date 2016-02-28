@@ -13,8 +13,6 @@ var Header = React.createClass({
 
         var firstLoadText = true;
 
-        //var $newText = $(".new");
-        //var $oldText = $(".old");
 
         var new_text = ReactDOM.findDOMNode(this.refs.newText),
             old_text = ReactDOM.findDOMNode(this.refs.oldText);
@@ -91,8 +89,8 @@ var Header = React.createClass({
         return(
             <div className="nav">
                 <div className={"left-side "+this.props.activeView+"-active"}>
-                    <a href="#" className="item blog" onClick={this.handleClickBlog}><span>BLOG</span></a>
-                    <a href="#" className="item exp" onClick={this.handleClickExp}><span>EXP</span></a>
+                    <a href="#blog" className="item blog" onClick={this.handleClickBlog}><span>BLOG</span></a>
+                    <a href="#exp" className="item exp" onClick={this.handleClickExp}><span>EXP</span></a>
                     <a href="#me" className="item me" onClick={this.handleClickMe}><span>ME</span></a>
                 </div>
                 <div className="right-side">

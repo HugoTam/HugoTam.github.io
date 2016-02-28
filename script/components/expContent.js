@@ -134,7 +134,7 @@ var TimeLineArea = React.createClass({
 
     componentDidMount: function(){
 
-        var _this = this;
+        var that = this;
 
 
         //给dot高度
@@ -144,7 +144,7 @@ var TimeLineArea = React.createClass({
                     $dotIntro = $this.find(".dot-intro"),
                     $dotTitle = $dotIntro.find(".dot-title");
 
-                var dotTitleCon = _this.props.items[i].title;
+                var dotTitleCon = that.props.items[i].title;
                 $dotTitle.append(dotTitleCon);
 
                 var dotConHeight = $dotIntro.height();
@@ -166,14 +166,14 @@ var TimeLineArea = React.createClass({
 
     render: function(){
 
-        var _this = this;
+        var that = this;
 
         var dots = this.props.items.map(function(item,i){
 
             return(
                 <div className="timeline-dot" key={i}>
                     {/*bind不懂，为什么顺序是这样的*/}
-                    <a href="#" className="dot" onClick={_this.handleShowCon.bind(_this,item.itemName)}></a>
+                    <a href="#" className="dot" onClick={that.handleShowCon.bind(that,item.itemName)}></a>
                     <div className="dot-intro">
                         <div className="dot-time">{item.time}</div>
                         <div className="dot-title"></div>

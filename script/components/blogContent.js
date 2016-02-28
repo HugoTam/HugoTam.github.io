@@ -1,12 +1,162 @@
 /**
  * Created by hugotam on 16/2/20.
  */
+
+
+ME.papers = [{
+    title: "22岁前夕游学校",
+    createTime: "2015.09.21",
+    author: "Hugo Tam",
+    type: "writing",
+    summary: "他在酒店独自呆了一个下午，晚上还是决定去大学走一下，重回那所他呆过四年的大学，不是想怀念什么，而是酒店wifi信号实在不好，他看电视也看无聊，磨蹭了半个小时才走出的门。这次回来的理由跟上次一样，也是来补考大四下学期时电影编导理论这门课。这件事折磨了他好长时间，后悔自"
+},{
+    title: "假期实习分享",
+    createTime: "2015.10.02",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: ""
+},{
+    title: "无聊巴士上随想",
+    createTime: "2015.10.25",
+    author: "Hugo Tam",
+    type: "writing",
+    summary: "六点一刻，阿星发完给上级的邮件，便收拾东西去吃晚饭。一同去吃饭的同事李苟是阿星最看不惯的，走在路上还要拿着个kindle，且不说路上昏暗根本看不清，即使硬是要看他也绝不会看进多少，因为李苟是这群人中最爱扯淡的人，没走几步路就会向我们吹捧他热衷的魔鬼约会学。最气的是他的犹豫不决，李苟总在下了班才考虑收拾东西，而令他犹豫不决却是要带回家什么书。"
+},{
+    title: "与高中暗恋对象通电话后编",
+    createTime: "2015.11.01",
+    author: "Hugo Tam",
+    type: "writing",
+    summary: "“喂，你是谁啊？”电话那头传来了那熟悉又温柔的声音。阿星拿着大鹏的手机问道:“请问你是唐莹莹小姐吗，我是大鹏的朋友。”电话那头沉默了几秒，回答道“你们是在玩大冒险吗？”大鹏听到自己手机这么快就被接了，有些惊讶，大晚上的她居然会这么干爽的接了自己的电话。"
+},{
+    title: "孤独的创业者(坑)",
+    createTime: "2015.12.14",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: "孤独的创业者，是我们公司搬到德思勤的孵化器后所看所想的第一感觉。也是实习的几个月以来，在初创公司的深深体会。孤独感一直伴随着我，在我工作的地方环绕，渗透在我的脑海当中。孵化器那里有不少创业者，或如三楼不少创业者一样，独身一人，对着屏幕，做着不知道尽头、不知道结果的事情，每逢去厕所经过走廊，只看到他们全神贯注的表情，"
+},{
+    title: "建站初衷",
+    createTime: "2016.02.28",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: ""
+}];
+
+
 //博客内容容器
 var BlogContent = React.createClass({
 
+    getInitialState: function(){
+        return{
+            papers: ME.papers,
+            showSummary: true,
+            readPaper: {}
+        }
+    },
+
+    //缩减summary字数，太懒
+    limitSummaryLength: function(){
+        for(i=0;i<ME.papers.length;i++){
+            var summary = ME.papers[i].summary;
+            var defaultSummary = "暂时还没想好......";
+            if(summary.length>120){
+                ME.papers[i].summary = summary.substr(0,120);
+            }else if(summary == ""){
+                ME.papers[i].summary = defaultSummary;
+            }
+        }
+    },
+
+    //为summary赋高度值或清零
+    setSummaryHeight: function(clean){
+        var $summaryH = $(".summary-h");
+
+        if(!clean){
+            $summaryH.each(function(){
+                $(this).height($(this).height());
+            });
+        }else{
+            $summaryH.each(function(){
+                $(this).css("height","");
+            });
+        }
+
+    },
+
+    componentWillMount: function(){
+        this.limitSummaryLength();
+    },
+
+    transformCreateTime: function(time,symbol){
+        if(symbol){
+            return time.split(".").join(symbol);
+        }else{
+            return time.split(".").join("");
+        }
+
+    },
+
+    componentDidMount: function(){
+        this.setSummaryHeight();
+
+        if(this.state.showSummary){
+            ReactDOM.findDOMNode(this.refs.papersWrapper).classList.add("summary");
+        }
+    },
+
+    handleReadPaper: function(paper,event){
+        event.preventDefault();
+        this.setState({readPaper: paper});
+
+        var papersWrapper = ReactDOM.findDOMNode(this.refs.papersWrapper);
+        papersWrapper.classList.add("will-read-paper");
+
+        var $paperItem = $(event.target).parents(".paper-item");
+        $paperItem.addClass("read-this");
+        this.setSummaryHeight(true);
+
+        setTimeout(function(){
+            papersWrapper.classList.add("read-paper");
+        },400)
+
+    },
+
+    handleReturnBlog: function(){
+        this.setState({readPaper: {}});
+        var $papersWrapper = $(ReactDOM.findDOMNode(this.refs.papersWrapper));
+        $papersWrapper.removeClass("read-paper will-read-paper");
+        this.setSummaryHeight();
+        $papersWrapper.find(".read-this").removeClass("read-this");
+
+    },
+
     render: function(){
-        return <div>
-            BLOG
+        var that = this;
+
+        var papers = this.state.papers.map(function(paper,i){
+           return(
+               <div key={i} className="paper-item">
+                   <div className="title"><a href="#" onClick={that.handleReadPaper.bind(that,paper)}>{paper.title}</a></div>
+                   <div className="summary-h">
+                       <div className="summary">{paper.summary}<a className="read" onClick={that.handleReadPaper.bind(that,paper)} href="#">.读</a></div>
+                   </div>
+               </div>
+           );
+        });
+
+        return <div className="blog-wrapper">
+            <div ref="papersWrapper" className="papers-wrapper">
+                <div className="papers">{papers}</div>
+                <PaperContent
+                    readPaper={this.state.readPaper}
+                    handleReturn={this.handleReturnBlog}
+                />
+                <div className="di-line"></div>
+            </div>
+            <div className="other-wrapper">
+                <p>此处留白半屏</p>
+                <p>反正不用放广告</p>
+                <p>哈哈哈哈哈哈...好无聊的人</p>
+            </div>
         </div>
     }
 

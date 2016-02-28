@@ -898,6 +898,139 @@ a{
 
 /*EXP 结束*/
 
+/*BLOG 开始*/
+.blog-wrapper .papers-wrapper{
+    position: relative;
+    display: inline-block;
+    width: 540px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.blog-wrapper .other-wrapper{
+    display: inline-block;
+    /*width: 440px;*/
+}
+
+.papers-wrapper .paper-item{
+    padding: 20px 0 10px;
+    -webkit-transition: padding .4s;
+    transition: padding .4s;
+    /*padding-bottom: 40px;*/
+
+}
+
+.paper-item .title{
+    -webkit-transition: opacity .3s, height .4s;
+    transition: opacity .3s, height .4s;
+    height: 40px;
+    line-height: 40px;
+    opacity: .8;
+}
+
+.paper-item:hover .title{
+    opacity: .9;
+}
+
+.paper-item .title a{
+    font-family: STZhongsong;
+    font-size: 22px;
+}
+
+.paper-item .title a::after{
+    content: '/#';
+    opacity: 0;
+    font-size: 18px;
+    padding-left: 4px;
+    /*-webkit-transition: opacity .3s;*/
+    /*transition: opacity .3s;*/
+}
+
+.paper-item .title a:hover::after{
+    opacity: .2;
+}
+
+.paper-item .summary{
+    font-size: 16px;
+    line-height: 26px;
+    opacity: .7;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+    cursor: default;
+}
+
+.paper-item:hover .summary{
+    opacity: .9;
+}
+
+.paper-item .read{
+    font-family: STZhongsong;
+    font-size: 22px;
+    line-height: 26px;
+    padding-left: 10px;
+    opacity: .3;
+}
+
+.paper-item .read:hover{
+    opacity: .4;
+}
+
+.papers-wrapper .di-line{
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 1px;
+    height: 92%;
+    background: #d8d8d8;
+}
+
+/*read paper*/
+.papers-wrapper.will-read-paper .paper-item .title{
+    opacity: 0;
+    height: 0;
+}
+
+.papers-wrapper.will-read-paper .paper-item{
+    padding: 0;
+}
+
+.papers-wrapper.will-read-paper .paper-item.read-this{
+    padding: 10px 0 20px;
+}
+
+.papers-wrapper.will-read-paper .paper-item.read-this .title{
+    padding: 20px 0 10px;
+    height: auto;
+    opacity: 1;
+}
+
+.papers-wrapper .paper-item .summary-h{
+    transition: height .4s, opacity .3s;
+}
+
+.papers-wrapper.will-read-paper .paper-item .summary-h{
+    opacity: 0;
+    height: 0;
+}
+
+
+.papers-wrapper.read-paper .paper-item,
+.papers-wrapper.read-paper .paper-item.read-this .summary-h{
+    display: none;
+}
+
+.papers-wrapper.read-paper .paper-item.read-this{
+    display: block;
+}
+
+.papers-wrapper.read-paper .paper{
+
+}
+
+
+
+/*BLOG 结束*/
+
 
 
 /*内容 结束*/

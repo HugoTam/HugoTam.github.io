@@ -13,8 +13,6 @@ var Header = React.createClass({displayName: "Header",
 
         var firstLoadText = true;
 
-        //var $newText = $(".new");
-        //var $oldText = $(".old");
 
         var new_text = ReactDOM.findDOMNode(this.refs.newText),
             old_text = ReactDOM.findDOMNode(this.refs.oldText);
@@ -91,8 +89,8 @@ var Header = React.createClass({displayName: "Header",
         return(
             React.createElement("div", {className: "nav"}, 
                 React.createElement("div", {className: "left-side "+this.props.activeView+"-active"}, 
-                    React.createElement("a", {href: "#", className: "item blog", onClick: this.handleClickBlog}, React.createElement("span", null, "BLOG")), 
-                    React.createElement("a", {href: "#", className: "item exp", onClick: this.handleClickExp}, React.createElement("span", null, "EXP")), 
+                    React.createElement("a", {href: "#blog", className: "item blog", onClick: this.handleClickBlog}, React.createElement("span", null, "BLOG")), 
+                    React.createElement("a", {href: "#exp", className: "item exp", onClick: this.handleClickExp}, React.createElement("span", null, "EXP")), 
                     React.createElement("a", {href: "#me", className: "item me", onClick: this.handleClickMe}, React.createElement("span", null, "ME"))
                 ), 
                 React.createElement("div", {className: "right-side"}, 
@@ -113,16 +111,181 @@ var Header = React.createClass({displayName: "Header",
 /**
  * Created by hugotam on 16/2/20.
  */
+var PaperContent = React.createClass({displayName: "PaperContent",
+    handleReturnBlog: function(){
+        this.props.handleReturn();
+    },
 
+    render: function(){
+        var that = this;
+        console.log(this.props.readPaper);
+        return(
+            React.createElement("div", {className: "paper"}, 
+                React.createElement("p", null, "先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数"), 
+                React.createElement("a", {href: "#", onClick: that.handleReturnBlog}, "返回")
+            )
+        )
+    }
+});
 /**
  * Created by hugotam on 16/2/20.
  */
+
+
+ME.papers = [{
+    title: "22岁前夕游学校",
+    createTime: "2015.09.21",
+    author: "Hugo Tam",
+    type: "writing",
+    summary: "他在酒店独自呆了一个下午，晚上还是决定去大学走一下，重回那所他呆过四年的大学，不是想怀念什么，而是酒店wifi信号实在不好，他看电视也看无聊，磨蹭了半个小时才走出的门。这次回来的理由跟上次一样，也是来补考大四下学期时电影编导理论这门课。这件事折磨了他好长时间，后悔自"
+},{
+    title: "假期实习分享",
+    createTime: "2015.10.02",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: ""
+},{
+    title: "无聊巴士上随想",
+    createTime: "2015.10.25",
+    author: "Hugo Tam",
+    type: "writing",
+    summary: "六点一刻，阿星发完给上级的邮件，便收拾东西去吃晚饭。一同去吃饭的同事李苟是阿星最看不惯的，走在路上还要拿着个kindle，且不说路上昏暗根本看不清，即使硬是要看他也绝不会看进多少，因为李苟是这群人中最爱扯淡的人，没走几步路就会向我们吹捧他热衷的魔鬼约会学。最气的是他的犹豫不决，李苟总在下了班才考虑收拾东西，而令他犹豫不决却是要带回家什么书。"
+},{
+    title: "与高中暗恋对象通电话后编",
+    createTime: "2015.11.01",
+    author: "Hugo Tam",
+    type: "writing",
+    summary: "“喂，你是谁啊？”电话那头传来了那熟悉又温柔的声音。阿星拿着大鹏的手机问道:“请问你是唐莹莹小姐吗，我是大鹏的朋友。”电话那头沉默了几秒，回答道“你们是在玩大冒险吗？”大鹏听到自己手机这么快就被接了，有些惊讶，大晚上的她居然会这么干爽的接了自己的电话。"
+},{
+    title: "孤独的创业者(坑)",
+    createTime: "2015.12.14",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: "孤独的创业者，是我们公司搬到德思勤的孵化器后所看所想的第一感觉。也是实习的几个月以来，在初创公司的深深体会。孤独感一直伴随着我，在我工作的地方环绕，渗透在我的脑海当中。孵化器那里有不少创业者，或如三楼不少创业者一样，独身一人，对着屏幕，做着不知道尽头、不知道结果的事情，每逢去厕所经过走廊，只看到他们全神贯注的表情，"
+},{
+    title: "建站初衷",
+    createTime: "2016.02.28",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: ""
+}];
+
+
 //博客内容容器
 var BlogContent = React.createClass({displayName: "BlogContent",
 
+    getInitialState: function(){
+        return{
+            papers: ME.papers,
+            showSummary: true,
+            readPaper: {}
+        }
+    },
+
+    //缩减summary字数，太懒
+    limitSummaryLength: function(){
+        for(i=0;i<ME.papers.length;i++){
+            var summary = ME.papers[i].summary;
+            var defaultSummary = "暂时还没想好......";
+            if(summary.length>120){
+                ME.papers[i].summary = summary.substr(0,120);
+            }else if(summary == ""){
+                ME.papers[i].summary = defaultSummary;
+            }
+        }
+    },
+
+    //为summary赋高度值或清零
+    setSummaryHeight: function(clean){
+        var $summaryH = $(".summary-h");
+
+        if(!clean){
+            $summaryH.each(function(){
+                $(this).height($(this).height());
+            });
+        }else{
+            $summaryH.each(function(){
+                $(this).css("height","");
+            });
+        }
+
+    },
+
+    componentWillMount: function(){
+        this.limitSummaryLength();
+    },
+
+    transformCreateTime: function(time,symbol){
+        if(symbol){
+            return time.split(".").join(symbol);
+        }else{
+            return time.split(".").join("");
+        }
+
+    },
+
+    componentDidMount: function(){
+        this.setSummaryHeight();
+
+        if(this.state.showSummary){
+            ReactDOM.findDOMNode(this.refs.papersWrapper).classList.add("summary");
+        }
+    },
+
+    handleReadPaper: function(paper,event){
+        event.preventDefault();
+        this.setState({readPaper: paper});
+
+        var papersWrapper = ReactDOM.findDOMNode(this.refs.papersWrapper);
+        papersWrapper.classList.add("will-read-paper");
+
+        var $paperItem = $(event.target).parents(".paper-item");
+        $paperItem.addClass("read-this");
+        this.setSummaryHeight(true);
+
+        setTimeout(function(){
+            papersWrapper.classList.add("read-paper");
+        },400)
+
+    },
+
+    handleReturnBlog: function(){
+        this.setState({readPaper: {}});
+        var $papersWrapper = $(ReactDOM.findDOMNode(this.refs.papersWrapper));
+        $papersWrapper.removeClass("read-paper will-read-paper");
+        this.setSummaryHeight();
+        $papersWrapper.find(".read-this").removeClass("read-this");
+
+    },
+
     render: function(){
-        return React.createElement("div", null, 
-            "BLOG"
+        var that = this;
+
+        var papers = this.state.papers.map(function(paper,i){
+           return(
+               React.createElement("div", {key: i, className: "paper-item"}, 
+                   React.createElement("div", {className: "title"}, React.createElement("a", {href: "#", onClick: that.handleReadPaper.bind(that,paper)}, paper.title)), 
+                   React.createElement("div", {className: "summary-h"}, 
+                       React.createElement("div", {className: "summary"}, paper.summary, React.createElement("a", {className: "read", onClick: that.handleReadPaper.bind(that,paper), href: "#"}, ".读"))
+                   )
+               )
+           );
+        });
+
+        return React.createElement("div", {className: "blog-wrapper"}, 
+            React.createElement("div", {ref: "papersWrapper", className: "papers-wrapper"}, 
+                React.createElement("div", {className: "papers"}, papers), 
+                React.createElement(PaperContent, {
+                    readPaper: this.state.readPaper, 
+                    handleReturn: this.handleReturnBlog}
+                ), 
+                React.createElement("div", {className: "di-line"})
+            ), 
+            React.createElement("div", {className: "other-wrapper"}, 
+                React.createElement("p", null, "此处留白半屏"), 
+                React.createElement("p", null, "反正不用放广告"), 
+                React.createElement("p", null, "哈哈哈哈哈哈...好无聊的人")
+            )
         )
     }
 
@@ -203,9 +366,9 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
     },
 
     handleActiveEvent: function(){
-        var _this = this;
+        var that = this;
 
-        if(_this.props.event == "HUT"){
+        if(that.props.event == "HUT"){
             var $key = $(".event-HUT .key");
 
             $key.each(function(i){
@@ -234,7 +397,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
     },
 
     handleKeyActive: function(key){
-        var _this = this;
+        var that = this;
         var keys = ReactDOM.findDOMNode(this.refs.keys);
 
         this.setState({keyActive: key});
@@ -242,10 +405,10 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
         switch(key){
             case "LOL":
-                _this.props.getMyTags("网瘾少年");
+                that.props.getMyTags("网瘾少年");
                 break;
             case "universityStudent":
-                _this.props.getMyTags("一个大学生");
+                that.props.getMyTags("一个大学生");
                 break;
         }
 
@@ -254,15 +417,15 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
 
     render: function(){
-        var _this = this;
+        var that = this;
 
-        switch(_this.props.event){
+        switch(that.props.event){
             case "HUT":
                 var con = React.createElement("div", {className: "key-wrapper"}, 
-                    React.createElement("div", {ref: "keys", className: "keys", onMouseUp: _this.handleCancelKeyActive, onMouseLeave: _this.handleCancelKeyActive}, 
+                    React.createElement("div", {ref: "keys", className: "keys", onMouseUp: that.handleCancelKeyActive, onMouseLeave: that.handleCancelKeyActive}, 
                         React.createElement("a", {href: "#", className: "key t1"}, "湖南工业大学"), 
-                        React.createElement("a", {href: "#", className: "key t2 ", onMouseDown: _this.handleKeyActive.bind(null,"packagingEngineering")}, "包装工程"), 
-                        React.createElement("a", {href: "#", className: "key t3", onMouseDown: _this.handleKeyActive.bind(null,"bestMajor")}, "皇牌专业"), 
+                        React.createElement("a", {href: "#", className: "key t2 ", onMouseDown: that.handleKeyActive.bind(null,"packagingEngineering")}, "包装工程"), 
+                        React.createElement("a", {href: "#", className: "key t3", onMouseDown: that.handleKeyActive.bind(null,"bestMajor")}, "皇牌专业"), 
                         React.createElement("a", {href: "#", className: "key t4"}, 
                             React.createElement("span", {className: "box1"}, "盒子"), 
                             React.createElement("span", {className: "box2"}, "盒子")
@@ -272,11 +435,11 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
                             React.createElement("span", {className: "words"}, "流水线"), 
                             React.createElement("span", {className: "word w1"}, "流"), React.createElement("span", {className: "word w2"}, "水"), React.createElement("span", {className: "word w3"}, "线")
                         ), 
-                        React.createElement("a", {href: "#", className: "key t7", onMouseDown: _this.handleKeyActive.bind(null,"confuse")}, "迷茫"), 
-                        React.createElement("a", {href: "#", className: "key t8", onMouseDown: _this.handleKeyActive.bind(null,"lonely")}, "孤独"), 
+                        React.createElement("a", {href: "#", className: "key t7", onMouseDown: that.handleKeyActive.bind(null,"confuse")}, "迷茫"), 
+                        React.createElement("a", {href: "#", className: "key t8", onMouseDown: that.handleKeyActive.bind(null,"lonely")}, "孤独"), 
                         React.createElement("a", {href: "#", className: "key t9"}, "WOW"), 
-                        React.createElement("a", {href: "#", className: "key t10", onMouseDown: _this.handleKeyActive.bind(null,"LOL")}, "LOL"), 
-                        React.createElement("a", {href: "#", className: "key t11", onMouseDown: _this.handleKeyActive.bind(null,"universityStudent")}, "大学生"), 
+                        React.createElement("a", {href: "#", className: "key t10", onMouseDown: that.handleKeyActive.bind(null,"LOL")}, "LOL"), 
+                        React.createElement("a", {href: "#", className: "key t11", onMouseDown: that.handleKeyActive.bind(null,"universityStudent")}, "大学生"), 
                         React.createElement("a", {href: "#", className: "key t12"}, "考研"), 
                         React.createElement("a", {href: "#", className: "key t13"}, "恐惧")
                     )
@@ -291,7 +454,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
         }
 
         return(
-            React.createElement("div", {className: "show-con-wrapper event-"+_this.props.event}, con)
+            React.createElement("div", {className: "show-con-wrapper event-"+that.props.event}, con)
 
         )
     }
@@ -433,7 +596,7 @@ var TimeLineArea = React.createClass({displayName: "TimeLineArea",
 
     componentDidMount: function(){
 
-        var _this = this;
+        var that = this;
 
 
         //给dot高度
@@ -443,7 +606,7 @@ var TimeLineArea = React.createClass({displayName: "TimeLineArea",
                     $dotIntro = $this.find(".dot-intro"),
                     $dotTitle = $dotIntro.find(".dot-title");
 
-                var dotTitleCon = _this.props.items[i].title;
+                var dotTitleCon = that.props.items[i].title;
                 $dotTitle.append(dotTitleCon);
 
                 var dotConHeight = $dotIntro.height();
@@ -465,14 +628,14 @@ var TimeLineArea = React.createClass({displayName: "TimeLineArea",
 
     render: function(){
 
-        var _this = this;
+        var that = this;
 
         var dots = this.props.items.map(function(item,i){
 
             return(
                 React.createElement("div", {className: "timeline-dot", key: i}, 
                     /*bind不懂，为什么顺序是这样的*/
-                    React.createElement("a", {href: "#", className: "dot", onClick: _this.handleShowCon.bind(_this,item.itemName)}), 
+                    React.createElement("a", {href: "#", className: "dot", onClick: that.handleShowCon.bind(that,item.itemName)}), 
                     React.createElement("div", {className: "dot-intro"}, 
                         React.createElement("div", {className: "dot-time"}, item.time), 
                         React.createElement("div", {className: "dot-title"})
@@ -504,7 +667,7 @@ var TimeLineArea = React.createClass({displayName: "TimeLineArea",
 var BlogWrapper = React.createClass({displayName: "BlogWrapper",
     getInitialState: function(){
         return {
-            view: "exp",
+            view: "blog",
             skillsTree: [],
             myTags: []
         }
@@ -558,7 +721,10 @@ var BlogWrapper = React.createClass({displayName: "BlogWrapper",
     render: function(){
 
         return React.createElement("div", null, 
-            React.createElement(Header, {activeView: this.state.view, handleView: this.setView}), 
+            React.createElement(Header, {
+                activeView: this.state.view, 
+                handleView: this.setView
+            }), 
             React.createElement(Content, {
                 view: this.state.view, 
                 getSkillsTree: this.setSkillsTree, 
@@ -576,6 +742,7 @@ var BlogWrapper = React.createClass({displayName: "BlogWrapper",
 //内容容器
 var Content = React.createClass({displayName: "Content",
 
+
     render: function(){
         var con;
         if(this.props.view == "me"){
@@ -589,8 +756,6 @@ var Content = React.createClass({displayName: "Content",
                 getSkillsTree: this.props.getSkillsTree, 
                 getMyTags: this.props.getMyTags}
                 );
-        }else if(this.props.view == "paper"){
-            con = React.createElement(PaperContent, null);
         }
 
         return React.createElement("div", {className: "content-wrapper"}, 
