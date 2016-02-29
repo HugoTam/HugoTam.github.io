@@ -134,7 +134,7 @@ var BlogContent = React.createClass({
 
         //滑到刚打开文章的顶部
         $("body").animate({
-            scrollTop: $papersWrapper.find(".read-this").offset().top
+            scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
         },300);
 
         //去掉类
@@ -171,7 +171,7 @@ var BlogContent = React.createClass({
                                 <div className="other-con">
                                     <p>没有人评论</p><span>因为还没开放评论</span>
                                     <div className="qr-img">
-                                        <img src="images/myQRcode.png" alt="qr-code"/>
+                                        <img src="images/myQRcode.png" alt="wechat-qr-code"/>
                                         <span className="qr-tips">女生欢迎直接微信(逃</span>
                                     </div>
                                 </div>

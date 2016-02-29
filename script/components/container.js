@@ -6,7 +6,7 @@
 var BlogWrapper = React.createClass({
     getInitialState: function(){
         return {
-            view: "blog",
+            view: "exp",
             skillsTree: [],
             myTags: []
         }
@@ -47,7 +47,6 @@ var BlogWrapper = React.createClass({
             if(tag == myTags[i]){
                 //重复
                 repeatTags = true;
-                console.log("重复了");
                 break;
             }
         }

@@ -322,7 +322,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
         //滑到刚打开文章的顶部
         $("body").animate({
-            scrollTop: $papersWrapper.find(".read-this").offset().top
+            scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
         },300);
 
         //去掉类
@@ -359,7 +359,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
                                 React.createElement("div", {className: "other-con"}, 
                                     React.createElement("p", null, "没有人评论"), React.createElement("span", null, "因为还没开放评论"), 
                                     React.createElement("div", {className: "qr-img"}, 
-                                        React.createElement("img", {src: "images/myQRcode.png", alt: "qr-code"}), 
+                                        React.createElement("img", {src: "images/myQRcode.png", alt: "wechat-qr-code"}), 
                                         React.createElement("span", {className: "qr-tips"}, "女生欢迎直接微信(逃")
                                     )
                                 )
@@ -542,6 +542,11 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
                 break;
             default :
+                var con=React.createElement("div", null, 
+                            React.createElement("p", null, "还在构思、实现，敬请期待。"), 
+                            React.createElement("p", null, "联系欢迎添加微信，无聊也可以看看我的文章:)"), 
+                            React.createElement("img", {src: "images/myQRcode.png", alt: "wechat-qr-code"})
+                        )
 
                 break;
 
@@ -762,7 +767,7 @@ var TimeLineArea = React.createClass({displayName: "TimeLineArea",
 var BlogWrapper = React.createClass({displayName: "BlogWrapper",
     getInitialState: function(){
         return {
-            view: "blog",
+            view: "exp",
             skillsTree: [],
             myTags: []
         }
@@ -803,7 +808,6 @@ var BlogWrapper = React.createClass({displayName: "BlogWrapper",
             if(tag == myTags[i]){
                 //重复
                 repeatTags = true;
-                console.log("重复了");
                 break;
             }
         }

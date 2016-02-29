@@ -104,6 +104,11 @@ var ShowConArea = React.createClass({
 
                 break;
             default :
+                var con=<div>
+                            <p>还在构思、实现，敬请期待。</p>
+                            <p>联系欢迎添加微信，无聊也可以看看我的文章:)</p>
+                            <img src="images/myQRcode.png" alt="wechat-qr-code"/>
+                        </div>
 
                 break;
 
