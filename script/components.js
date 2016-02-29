@@ -112,17 +112,76 @@ var Header = React.createClass({displayName: "Header",
  * Created by hugotam on 16/2/20.
  */
 var PaperContent = React.createClass({displayName: "PaperContent",
-    handleReturnBlog: function(){
-        this.props.handleReturn();
+    handleReturnBlog: function(event){
+        this.props.handleReturn(event);
+    },
+
+    transformCreateTime: function(time,symbol){
+        if(symbol){
+            return time.split(".").join(symbol);
+        }else{
+            return time.split(".").join("");
+        }
+
+    },
+
+    componentDidMount: function(){
+        this.getPaperContent();
+
+        $(window).on("mousedown",this.delayDetectSelectText);
+        $(window).on("mouseup",this.detectSelectText);
+    },
+
+    componentDidUpdate: function(){
+        this.getPaperContent();
+
+        $(window).on("mousedown",this.delayDetectSelectText);
+        $(window).on("mouseup",this.detectSelectText);
+    },
+
+    componentWillUnmount: function(){
+        //解除绑定
+        $(window).off("mousedown",this.delayDetectSelectText);
+        $(window).off("mouseup",this.detectSelectText);
+    },
+
+    getPaperContent: function(){
+        var createTime = this.transformCreateTime(this.props.readPaper.createTime);
+        var con = $.ajax({url:"paper/paper" + createTime + ".md",async:false});
+        var converter = new showdown.Converter();
+        var mdHtml = converter.makeHtml(con.responseText);
+
+        var $paperCon = $(ReactDOM.findDOMNode(this.refs.paperCon));
+
+        $paperCon.html(mdHtml);
+
+    },
+
+    detectSelectText: function(){
+        var selectText = window.getSelection().toString();
+        if(selectText && ReactDOM.findDOMNode(this.refs.paperCon)){
+            ReactDOM.findDOMNode(this.refs.paperCon).classList.add("selected");
+        }else{
+            ReactDOM.findDOMNode(this.refs.paperCon).classList.remove("selected");
+        }
+    },
+
+    delayDetectSelectText: function(){
+        var that = this;
+        setTimeout(function(){
+            var selectText = window.getSelection().toString();
+            if(!selectText && ReactDOM.findDOMNode(that.refs.paperCon)){
+                ReactDOM.findDOMNode(that.refs.paperCon).classList.remove("selected");
+            }
+        },100);
     },
 
     render: function(){
-        var that = this;
-        console.log(this.props.readPaper);
+
         return(
             React.createElement("div", {className: "paper"}, 
-                React.createElement("p", null, "先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数先随便放点内容充充字数"), 
-                React.createElement("a", {href: "#", onClick: that.handleReturnBlog}, "返回")
+                React.createElement("div", {onMouseDown: this.delayDetectSelectText, onMouseUp: this.detectSelectText, className: "paper-content", ref: "paperCon"}), 
+                React.createElement("a", {className: "bottom-return", href: "#", onClick: this.handleReturnBlog}, "到此为止了，回到开始的地方吧.")
             )
         )
     }
@@ -139,17 +198,17 @@ ME.papers = [{
     type: "writing",
     summary: "他在酒店独自呆了一个下午，晚上还是决定去大学走一下，重回那所他呆过四年的大学，不是想怀念什么，而是酒店wifi信号实在不好，他看电视也看无聊，磨蹭了半个小时才走出的门。这次回来的理由跟上次一样，也是来补考大四下学期时电影编导理论这门课。这件事折磨了他好长时间，后悔自"
 },{
-    title: "假期实习分享",
-    createTime: "2015.10.02",
-    author: "Hugo Tam",
-    type: "experience",
-    summary: ""
-},{
     title: "无聊巴士上随想",
-    createTime: "2015.10.25",
+    createTime: "2015.10.11",
     author: "Hugo Tam",
     type: "writing",
     summary: "六点一刻，阿星发完给上级的邮件，便收拾东西去吃晚饭。一同去吃饭的同事李苟是阿星最看不惯的，走在路上还要拿着个kindle，且不说路上昏暗根本看不清，即使硬是要看他也绝不会看进多少，因为李苟是这群人中最爱扯淡的人，没走几步路就会向我们吹捧他热衷的魔鬼约会学。最气的是他的犹豫不决，李苟总在下了班才考虑收拾东西，而令他犹豫不决却是要带回家什么书。"
+},{
+    title: "假期后实习分享",
+    createTime: "2015.10.25",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: "当我们开分享会的时候，分享的是什么？"
 },{
     title: "与高中暗恋对象通电话后编",
     createTime: "2015.11.01",
@@ -178,7 +237,8 @@ var BlogContent = React.createClass({displayName: "BlogContent",
         return{
             papers: ME.papers,
             showSummary: true,
-            readPaper: {}
+            readPaper: {},
+            didReadPaper: false
         }
     },
 
@@ -215,15 +275,6 @@ var BlogContent = React.createClass({displayName: "BlogContent",
         this.limitSummaryLength();
     },
 
-    transformCreateTime: function(time,symbol){
-        if(symbol){
-            return time.split(".").join(symbol);
-        }else{
-            return time.split(".").join("");
-        }
-
-    },
-
     componentDidMount: function(){
         this.setSummaryHeight();
 
@@ -234,7 +285,10 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
     handleReadPaper: function(paper,event){
         event.preventDefault();
-        this.setState({readPaper: paper});
+        this.setState({
+            readPaper: paper,
+            didReadPaper: true
+        });
 
         var papersWrapper = ReactDOM.findDOMNode(this.refs.papersWrapper);
         papersWrapper.classList.add("will-read-paper");
@@ -247,13 +301,31 @@ var BlogContent = React.createClass({displayName: "BlogContent",
             papersWrapper.classList.add("read-paper");
         },400)
 
+        //滑到顶部
+        $("body").animate({
+            scrollTop: 0
+        },300);
+
     },
 
-    handleReturnBlog: function(){
-        this.setState({readPaper: {}});
+    handleReturnBlog: function(event){
+
+        event.preventDefault();
+
+        this.setState({
+            readPaper: {},
+            didReadPaper: false
+        });
         var $papersWrapper = $(ReactDOM.findDOMNode(this.refs.papersWrapper));
         $papersWrapper.removeClass("read-paper will-read-paper");
         this.setSummaryHeight();
+
+        //滑到刚打开文章的顶部
+        $("body").animate({
+            scrollTop: $papersWrapper.find(".read-this").offset().top
+        },300);
+
+        //去掉类
         $papersWrapper.find(".read-this").removeClass("read-this");
 
     },
@@ -265,6 +337,9 @@ var BlogContent = React.createClass({displayName: "BlogContent",
            return(
                React.createElement("div", {key: i, className: "paper-item"}, 
                    React.createElement("div", {className: "title"}, React.createElement("a", {href: "#", onClick: that.handleReadPaper.bind(that,paper)}, paper.title)), 
+                   React.createElement("div", {className: "info"}, 
+                       React.createElement("span", {className: "create-time"}, paper.createTime)
+                   ), 
                    React.createElement("div", {className: "summary-h"}, 
                        React.createElement("div", {className: "summary"}, paper.summary, React.createElement("a", {className: "read", onClick: that.handleReadPaper.bind(that,paper), href: "#"}, ".读"))
                    )
@@ -272,19 +347,39 @@ var BlogContent = React.createClass({displayName: "BlogContent",
            );
         });
 
+        var paper,
+            otherWrapper;
+
+        if(that.state.didReadPaper){
+            paper = (React.createElement(PaperContent, {
+                        readPaper: that.state.readPaper, 
+                        handleReturn: that.handleReturnBlog}
+                    ));
+            otherWrapper = (React.createElement("div", {className: "other-wrapper read-paper"}, 
+                                React.createElement("div", {className: "other-con"}, 
+                                    React.createElement("p", null, "没有人评论"), React.createElement("span", null, "因为还没开放评论"), 
+                                    React.createElement("div", {className: "qr-img"}, 
+                                        React.createElement("img", {src: "images/myQRcode.png", alt: "qr-code"}), 
+                                        React.createElement("span", {className: "qr-tips"}, "女生欢迎直接微信(逃")
+                                    )
+                                )
+                            ));
+        }else{
+            otherWrapper = (React.createElement("div", {className: "other-wrapper"}, 
+                                React.createElement("div", {className: "other-con"}, 
+                                    React.createElement("p", null, "思考的宫殿")
+                                )
+                            ));
+        }
+
         return React.createElement("div", {className: "blog-wrapper"}, 
             React.createElement("div", {ref: "papersWrapper", className: "papers-wrapper"}, 
                 React.createElement("div", {className: "papers"}, papers), 
-                React.createElement(PaperContent, {
-                    readPaper: this.state.readPaper, 
-                    handleReturn: this.handleReturnBlog}
-                ), 
+                paper, 
                 React.createElement("div", {className: "di-line"})
             ), 
             React.createElement("div", {className: "other-wrapper"}, 
-                React.createElement("p", null, "此处留白半屏"), 
-                React.createElement("p", null, "反正不用放广告"), 
-                React.createElement("p", null, "哈哈哈哈哈哈...好无聊的人")
+                otherWrapper
             )
         )
     }

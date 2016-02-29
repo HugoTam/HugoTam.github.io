@@ -10,17 +10,17 @@ ME.papers = [{
     type: "writing",
     summary: "他在酒店独自呆了一个下午，晚上还是决定去大学走一下，重回那所他呆过四年的大学，不是想怀念什么，而是酒店wifi信号实在不好，他看电视也看无聊，磨蹭了半个小时才走出的门。这次回来的理由跟上次一样，也是来补考大四下学期时电影编导理论这门课。这件事折磨了他好长时间，后悔自"
 },{
-    title: "假期实习分享",
-    createTime: "2015.10.02",
-    author: "Hugo Tam",
-    type: "experience",
-    summary: ""
-},{
     title: "无聊巴士上随想",
-    createTime: "2015.10.25",
+    createTime: "2015.10.11",
     author: "Hugo Tam",
     type: "writing",
     summary: "六点一刻，阿星发完给上级的邮件，便收拾东西去吃晚饭。一同去吃饭的同事李苟是阿星最看不惯的，走在路上还要拿着个kindle，且不说路上昏暗根本看不清，即使硬是要看他也绝不会看进多少，因为李苟是这群人中最爱扯淡的人，没走几步路就会向我们吹捧他热衷的魔鬼约会学。最气的是他的犹豫不决，李苟总在下了班才考虑收拾东西，而令他犹豫不决却是要带回家什么书。"
+},{
+    title: "假期后实习分享",
+    createTime: "2015.10.25",
+    author: "Hugo Tam",
+    type: "experience",
+    summary: "当我们开分享会的时候，分享的是什么？"
 },{
     title: "与高中暗恋对象通电话后编",
     createTime: "2015.11.01",
@@ -49,7 +49,8 @@ var BlogContent = React.createClass({
         return{
             papers: ME.papers,
             showSummary: true,
-            readPaper: {}
+            readPaper: {},
+            didReadPaper: false
         }
     },
 
@@ -86,15 +87,6 @@ var BlogContent = React.createClass({
         this.limitSummaryLength();
     },
 
-    transformCreateTime: function(time,symbol){
-        if(symbol){
-            return time.split(".").join(symbol);
-        }else{
-            return time.split(".").join("");
-        }
-
-    },
-
     componentDidMount: function(){
         this.setSummaryHeight();
 
@@ -105,7 +97,10 @@ var BlogContent = React.createClass({
 
     handleReadPaper: function(paper,event){
         event.preventDefault();
-        this.setState({readPaper: paper});
+        this.setState({
+            readPaper: paper,
+            didReadPaper: true
+        });
 
         var papersWrapper = ReactDOM.findDOMNode(this.refs.papersWrapper);
         papersWrapper.classList.add("will-read-paper");
@@ -118,13 +113,31 @@ var BlogContent = React.createClass({
             papersWrapper.classList.add("read-paper");
         },400)
 
+        //滑到顶部
+        $("body").animate({
+            scrollTop: 0
+        },300);
+
     },
 
-    handleReturnBlog: function(){
-        this.setState({readPaper: {}});
+    handleReturnBlog: function(event){
+
+        event.preventDefault();
+
+        this.setState({
+            readPaper: {},
+            didReadPaper: false
+        });
         var $papersWrapper = $(ReactDOM.findDOMNode(this.refs.papersWrapper));
         $papersWrapper.removeClass("read-paper will-read-paper");
         this.setSummaryHeight();
+
+        //滑到刚打开文章的顶部
+        $("body").animate({
+            scrollTop: $papersWrapper.find(".read-this").offset().top
+        },300);
+
+        //去掉类
         $papersWrapper.find(".read-this").removeClass("read-this");
 
     },
@@ -136,6 +149,9 @@ var BlogContent = React.createClass({
            return(
                <div key={i} className="paper-item">
                    <div className="title"><a href="#" onClick={that.handleReadPaper.bind(that,paper)}>{paper.title}</a></div>
+                   <div className="info">
+                       <span className="create-time">{paper.createTime}</span>
+                   </div>
                    <div className="summary-h">
                        <div className="summary">{paper.summary}<a className="read" onClick={that.handleReadPaper.bind(that,paper)} href="#">.读</a></div>
                    </div>
@@ -143,19 +159,39 @@ var BlogContent = React.createClass({
            );
         });
 
+        var paper,
+            otherWrapper;
+
+        if(that.state.didReadPaper){
+            paper = (<PaperContent
+                        readPaper={that.state.readPaper}
+                        handleReturn={that.handleReturnBlog}
+                    />);
+            otherWrapper = (<div className="other-wrapper read-paper">
+                                <div className="other-con">
+                                    <p>没有人评论</p><span>因为还没开放评论</span>
+                                    <div className="qr-img">
+                                        <img src="images/myQRcode.png" alt="qr-code"/>
+                                        <span className="qr-tips">女生欢迎直接微信(逃</span>
+                                    </div>
+                                </div>
+                            </div>);
+        }else{
+            otherWrapper = (<div className="other-wrapper">
+                                <div className="other-con">
+                                    <p>思考的宫殿</p>
+                                </div>
+                            </div>);
+        }
+
         return <div className="blog-wrapper">
             <div ref="papersWrapper" className="papers-wrapper">
                 <div className="papers">{papers}</div>
-                <PaperContent
-                    readPaper={this.state.readPaper}
-                    handleReturn={this.handleReturnBlog}
-                />
+                {paper}
                 <div className="di-line"></div>
             </div>
             <div className="other-wrapper">
-                <p>此处留白半屏</p>
-                <p>反正不用放广告</p>
-                <p>哈哈哈哈哈哈...好无聊的人</p>
+                {otherWrapper}
             </div>
         </div>
     }
