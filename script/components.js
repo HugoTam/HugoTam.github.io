@@ -824,18 +824,20 @@ var BlogWrapper = React.createClass({displayName: "BlogWrapper",
 
     render: function(){
 
+
+
         return React.createElement("div", null, 
-            React.createElement(Header, {
-                activeView: this.state.view, 
-                handleView: this.setView
-            }), 
-            React.createElement(Content, {
-                view: this.state.view, 
-                getSkillsTree: this.setSkillsTree, 
-                getMyTags: this.setMyTags, 
-                updateMyTags: this.state.myTags}
-            )
-        )
+                    React.createElement(Header, {
+                        activeView: this.state.view, 
+                        handleView: this.setView
+                        }), 
+                    React.createElement(Content, {
+                        view: this.state.view, 
+                        getSkillsTree: this.setSkillsTree, 
+                        getMyTags: this.setMyTags, 
+                        updateMyTags: this.state.myTags}
+                        )
+                );
     }
 
 

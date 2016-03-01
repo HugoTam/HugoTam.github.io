@@ -8,4 +8,9 @@ $(function(){
     TamTool.initENV();
 
 
+    if($("body").hasClass("touch-device")){
+        window.location.href = window.location.pathname + "mobile";
+    }
+
+
 });

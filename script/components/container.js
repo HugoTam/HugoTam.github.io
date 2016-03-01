@@ -58,18 +58,20 @@ var BlogWrapper = React.createClass({
 
     render: function(){
 
+
+
         return <div>
-            <Header
-                activeView={this.state.view}
-                handleView={this.setView}
-            ></Header>
-            <Content
-                view={this.state.view}
-                getSkillsTree={this.setSkillsTree}
-                getMyTags={this.setMyTags}
-                updateMyTags={this.state.myTags}
-            />
-        </div>
+                    <Header
+                        activeView={this.state.view}
+                        handleView={this.setView}
+                        ></Header>
+                    <Content
+                        view={this.state.view}
+                        getSkillsTree={this.setSkillsTree}
+                        getMyTags={this.setMyTags}
+                        updateMyTags={this.state.myTags}
+                        />
+                </div>;
     }
 
 
