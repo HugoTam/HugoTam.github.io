@@ -6,15 +6,6 @@ var PaperContent = React.createClass({
         this.props.handleReturn(event);
     },
 
-    transformCreateTime: function(time,symbol){
-        if(symbol){
-            return time.split(".").join(symbol);
-        }else{
-            return time.split(".").join("");
-        }
-
-    },
-
     componentDidMount: function(){
         this.getPaperContent();
 
@@ -36,7 +27,7 @@ var PaperContent = React.createClass({
     },
 
     getPaperContent: function(){
-        var createTime = this.transformCreateTime(this.props.readPaper.createTime);
+        var createTime = TamTool.transformCreateTime(this.props.readPaper.createTime);
         var con = $.ajax({url:"paper/paper" + createTime + ".md",async:false});
         var converter = new showdown.Converter();
         var mdHtml = converter.makeHtml(con.responseText);
@@ -51,9 +42,14 @@ var PaperContent = React.createClass({
         var selectText = window.getSelection().toString();
         if(selectText && ReactDOM.findDOMNode(this.refs.paperCon)){
             ReactDOM.findDOMNode(this.refs.paperCon).classList.add("selected");
-        }else{
+            console.log("have text?");
+        }else if(!selectText && ReactDOM.findDOMNode(this.refs.paperCon)){
+            console.log("no text");
             ReactDOM.findDOMNode(this.refs.paperCon).classList.remove("selected");
+        }else{
+            console.log("other");
         }
+        //console.log("delayDetectSelectText "+selectText);
     },
 
     delayDetectSelectText: function(){
@@ -63,6 +59,7 @@ var PaperContent = React.createClass({
             if(!selectText && ReactDOM.findDOMNode(that.refs.paperCon)){
                 ReactDOM.findDOMNode(that.refs.paperCon).classList.remove("selected");
             }
+            console.log("detectSelectText "+selectText);
         },100);
     },
 

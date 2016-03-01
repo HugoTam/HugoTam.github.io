@@ -68,20 +68,20 @@ var Header = React.createClass({
         },360);
     },
 
-    handleClickBlog: function(){
+    handleClickBlog: function(event){
         this.props.handleView("blog");
         console.log("blog");
     },
 
-    handleClickExp: function(){
+    handleClickExp: function(event){
         this.props.handleView("exp");
         console.log("exp");
 
     },
 
-    handleClickMe: function(){
+    handleClickMe: function(event){
         this.props.handleView("me");
-        console.log("me")
+        console.log("me");
 
     },
 

@@ -70,11 +70,9 @@ var BlogWrapper = React.createClass({
                 updateMyTags={this.state.myTags}
             />
         </div>
-    },
-
-    componentDidMount: function(){
-
     }
+
+
 });
 
 //内容容器

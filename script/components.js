@@ -68,20 +68,20 @@ var Header = React.createClass({displayName: "Header",
         },360);
     },
 
-    handleClickBlog: function(){
+    handleClickBlog: function(event){
         this.props.handleView("blog");
         console.log("blog");
     },
 
-    handleClickExp: function(){
+    handleClickExp: function(event){
         this.props.handleView("exp");
         console.log("exp");
 
     },
 
-    handleClickMe: function(){
+    handleClickMe: function(event){
         this.props.handleView("me");
-        console.log("me")
+        console.log("me");
 
     },
 
@@ -116,15 +116,6 @@ var PaperContent = React.createClass({displayName: "PaperContent",
         this.props.handleReturn(event);
     },
 
-    transformCreateTime: function(time,symbol){
-        if(symbol){
-            return time.split(".").join(symbol);
-        }else{
-            return time.split(".").join("");
-        }
-
-    },
-
     componentDidMount: function(){
         this.getPaperContent();
 
@@ -146,7 +137,7 @@ var PaperContent = React.createClass({displayName: "PaperContent",
     },
 
     getPaperContent: function(){
-        var createTime = this.transformCreateTime(this.props.readPaper.createTime);
+        var createTime = TamTool.transformCreateTime(this.props.readPaper.createTime);
         var con = $.ajax({url:"paper/paper" + createTime + ".md",async:false});
         var converter = new showdown.Converter();
         var mdHtml = converter.makeHtml(con.responseText);
@@ -161,9 +152,14 @@ var PaperContent = React.createClass({displayName: "PaperContent",
         var selectText = window.getSelection().toString();
         if(selectText && ReactDOM.findDOMNode(this.refs.paperCon)){
             ReactDOM.findDOMNode(this.refs.paperCon).classList.add("selected");
-        }else{
+            console.log("have text?");
+        }else if(!selectText && ReactDOM.findDOMNode(this.refs.paperCon)){
+            console.log("no text");
             ReactDOM.findDOMNode(this.refs.paperCon).classList.remove("selected");
+        }else{
+            console.log("other");
         }
+        //console.log("delayDetectSelectText "+selectText);
     },
 
     delayDetectSelectText: function(){
@@ -173,6 +169,7 @@ var PaperContent = React.createClass({displayName: "PaperContent",
             if(!selectText && ReactDOM.findDOMNode(that.refs.paperCon)){
                 ReactDOM.findDOMNode(that.refs.paperCon).classList.remove("selected");
             }
+            console.log("detectSelectText "+selectText);
         },100);
     },
 
@@ -285,6 +282,9 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
     handleReadPaper: function(paper,event){
         event.preventDefault();
+
+        window.location.hash = "#paper" + TamTool.transformCreateTime(paper.createTime);
+
         this.setState({
             readPaper: paper,
             didReadPaper: true
@@ -299,7 +299,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
         setTimeout(function(){
             papersWrapper.classList.add("read-paper");
-        },400)
+        },400);
 
         //滑到顶部
         $("body").animate({
@@ -311,6 +311,8 @@ var BlogContent = React.createClass({displayName: "BlogContent",
     handleReturnBlog: function(event){
 
         event.preventDefault();
+
+        window.location.hash = "#blog";
 
         this.setState({
             readPaper: {},
@@ -341,7 +343,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
                        React.createElement("span", {className: "create-time"}, paper.createTime)
                    ), 
                    React.createElement("div", {className: "summary-h"}, 
-                       React.createElement("div", {className: "summary"}, paper.summary, React.createElement("a", {className: "read", onClick: that.handleReadPaper.bind(that,paper), href: "#"}, ".读"))
+                       React.createElement("div", {className: "summary"}, paper.summary, React.createElement("a", {className: "read", onClick: that.handleReadPaper.bind(that,paper)}, ".读"))
                    )
                )
            );
@@ -482,6 +484,9 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
             });
         }
+
+        //更新hash
+        window.location.hash = "exp-"+this.props.event;
     },
 
     handleCancelKeyActive: function(){
@@ -831,11 +836,9 @@ var BlogWrapper = React.createClass({displayName: "BlogWrapper",
                 updateMyTags: this.state.myTags}
             )
         )
-    },
-
-    componentDidMount: function(){
-
     }
+
+
 });
 
 //内容容器

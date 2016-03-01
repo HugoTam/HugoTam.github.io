@@ -44,6 +44,9 @@ var ShowConArea = React.createClass({
 
             });
         }
+
+        //更新hash
+        window.location.hash = "exp-"+this.props.event;
     },
 
     handleCancelKeyActive: function(){

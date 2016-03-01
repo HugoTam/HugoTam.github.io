@@ -5,5 +5,7 @@
 var ME = {};
 
 $(function(){
+    TamTool.initENV();
+
 
 });

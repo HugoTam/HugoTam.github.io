@@ -97,6 +97,9 @@ var BlogContent = React.createClass({
 
     handleReadPaper: function(paper,event){
         event.preventDefault();
+
+        window.location.hash = "#paper" + TamTool.transformCreateTime(paper.createTime);
+
         this.setState({
             readPaper: paper,
             didReadPaper: true
@@ -111,7 +114,7 @@ var BlogContent = React.createClass({
 
         setTimeout(function(){
             papersWrapper.classList.add("read-paper");
-        },400)
+        },400);
 
         //滑到顶部
         $("body").animate({
@@ -123,6 +126,8 @@ var BlogContent = React.createClass({
     handleReturnBlog: function(event){
 
         event.preventDefault();
+
+        window.location.hash = "#blog";
 
         this.setState({
             readPaper: {},
@@ -153,7 +158,7 @@ var BlogContent = React.createClass({
                        <span className="create-time">{paper.createTime}</span>
                    </div>
                    <div className="summary-h">
-                       <div className="summary">{paper.summary}<a className="read" onClick={that.handleReadPaper.bind(that,paper)} href="#">.读</a></div>
+                       <div className="summary">{paper.summary}<a className="read" onClick={that.handleReadPaper.bind(that,paper)}>.读</a></div>
                    </div>
                </div>
            );
