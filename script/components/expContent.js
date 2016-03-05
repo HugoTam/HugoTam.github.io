@@ -97,7 +97,6 @@ var ExpContent = React.createClass({
 
         }
 
-
     },
 
     handleShowCon: function(itemName,event){
@@ -128,7 +127,6 @@ var ExpContent = React.createClass({
 
 
 var TimeLineArea = React.createClass({
-
 
     componentDidMount: function(){
 

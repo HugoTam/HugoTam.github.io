@@ -16,10 +16,10 @@ var ShowConArea = React.createClass({
         this.handleActiveEvent();
     },
 
-
     //接受到新的props或者setdate完成渲染DOM时...
     componentDidUpdate: function(){
         this.handleActiveEvent();
+        window.location.hash = "exp-"+this.props.event;
     },
 
     handleActiveEvent: function(){
@@ -46,7 +46,7 @@ var ShowConArea = React.createClass({
         }
 
         //更新hash
-        window.location.hash = "exp-"+this.props.event;
+        //window.location.hash = "exp-"+this.props.event;
     },
 
     handleCancelKeyActive: function(){

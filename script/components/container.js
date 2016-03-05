@@ -5,11 +5,25 @@
 //整个容器
 var BlogWrapper = React.createClass({
     getInitialState: function(){
+        if(window.location.hash.substr(1,5) == "paper"){
+            var view = "paper",
+                paper = window.location.hash.substr(6,10);
+        }else{
+            var view = window.location.hash.split("#")[1],
+                paper = "";
+        }
+
+
         return {
-            view: "exp",
+            view: view,
+            paper: paper,
             skillsTree: [],
             myTags: []
         }
+    },
+
+    componentWillMount: function(){
+        console.log(this.state.view);
     },
 
     setView: function(view){
@@ -42,8 +56,6 @@ var BlogWrapper = React.createClass({
         var repeatTags = false;
         //查下重
         for(i=0;i<myTags.length;i++){
-            console.log(tag);
-            console.log(myTags[i]);
             if(tag == myTags[i]){
                 //重复
                 repeatTags = true;
@@ -70,6 +82,7 @@ var BlogWrapper = React.createClass({
                         getSkillsTree={this.setSkillsTree}
                         getMyTags={this.setMyTags}
                         updateMyTags={this.state.myTags}
+                        paper={this.state.paper}
                         />
                 </div>;
     }
@@ -90,6 +103,15 @@ var Content = React.createClass({
         }else if(this.props.view == "blog"){
             con = <BlogContent />;
         }else if(this.props.view == "exp"){
+            con = <ExpContent
+                getSkillsTree={this.props.getSkillsTree}
+                getMyTags={this.props.getMyTags}
+                />;
+        }else if(this.props.view == "paper"){
+            con = <BlogContent
+                paper={this.props.paper}
+                />;
+        }else{
             con = <ExpContent
                 getSkillsTree={this.props.getSkillsTree}
                 getMyTags={this.props.getMyTags}

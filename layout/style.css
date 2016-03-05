@@ -283,8 +283,8 @@ a{
 }
 
 .paper-item .title{
-    -webkit-transition: opacity .3s, height .4s;
-    transition: opacity .3s, height .4s;
+    -webkit-transition: opacity .3s, height .4s, padding .4s;
+    transition: opacity .3s, height .4s, padding .4s;
     height: 40px;
     line-height: 40px;
     opacity: .8;
