@@ -611,3 +611,47 @@ dialog::backdrop {
     right: 0;
     background-color: rgba(0, 0, 0, .3);
 }
+
+
+/*自定义样式*/
+/*闪动的点dian*/
+.dian{
+    display: inline-block;
+    background: #46454C;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dian::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #46454C;
+    opacity: .35;
+    left: 0;
+    top: 0;
+    -webkit-transform: scale(1.6);
+    transform: scale(1.6);
+}
+
+.dian.b,.dian.b::after{
+    background: #0290E9;
+}
+
+.dian:hover::after{
+    -webkit-animation: scaleOpa 1.2s infinite ease;
+    animation: scaleOpa 1.2s infinite ease;
+}
+
+@keyframes scaleOpa {
+    0%{transform: scale(1.6);opacity: .35;}
+    100%{transform: scale(3);opacity: 0;}
+}
+
+@-webkit-keyframes scaleOpa {
+    0%{-webkit-transform: scale(1.6);opacity: .35;}
+    100%{-webkit-transform: scale(3);opacity: 0;}
+}

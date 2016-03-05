@@ -496,22 +496,30 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
         this.setState({keyActive: ""});
     },
 
-    handleKeyActive: function(key){
+    handleKeyActive: function(key,event){
+        event.preventDefault();
         var that = this;
+
+
         var keys = ReactDOM.findDOMNode(this.refs.keys);
 
-        this.setState({keyActive: key});
-        $(keys).addClass("keyactive-"+key);
 
-        switch(key){
-            case "LOL":
-                that.props.getMyTags("网瘾少年");
-                break;
-            case "universityStudent":
-                that.props.getMyTags("一个大学生");
-                break;
+        if(key){
+
+            this.setState({keyActive: key});
+            $(keys).addClass("keyactive-"+key);
+
+            switch(key){
+                case "LOL":
+                    that.props.getMyTags("网瘾少年");
+                    break;
+                case "universityStudent":
+                    that.props.getMyTags("一个大学生");
+                    break;
+                default :
+                    break;
+            }
         }
-
 
     },
 
@@ -521,37 +529,46 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
         switch(that.props.event){
             case "HUT":
-                var con = React.createElement("div", {className: "key-wrapper"}, 
+                var con = (React.createElement("div", {className: "key-wrapper"}, 
                     React.createElement("div", {ref: "keys", className: "keys", onMouseUp: that.handleCancelKeyActive, onMouseLeave: that.handleCancelKeyActive}, 
-                        React.createElement("a", {href: "#", className: "key t1"}, "湖南工业大学"), 
-                        React.createElement("a", {href: "#", className: "key t2 ", onMouseDown: that.handleKeyActive.bind(null,"packagingEngineering")}, "包装工程"), 
-                        React.createElement("a", {href: "#", className: "key t3", onMouseDown: that.handleKeyActive.bind(null,"bestMajor")}, "皇牌专业"), 
-                        React.createElement("a", {href: "#", className: "key t4"}, 
+                        React.createElement("a", {className: "key t1"}, "湖南工业大学"), 
+                        React.createElement("a", {className: "key t2", onMouseDown: that.handleKeyActive.bind(null,"packagingEngineering")}, "包装工程"), 
+                        React.createElement("a", {className: "key t3", onMouseDown: that.handleKeyActive.bind(null,"bestMajor")}, "皇牌专业"), 
+                        React.createElement("a", {className: "key t4"}, 
                             React.createElement("span", {className: "box1"}, "盒子"), 
                             React.createElement("span", {className: "box2"}, "盒子")
                         ), 
-                        React.createElement("a", {href: "#", className: "key t5"}, "工厂"), 
-                        React.createElement("a", {href: "#", className: "key t6"}, 
+                        React.createElement("a", {className: "key t5"}, "工厂"), 
+                        React.createElement("a", {className: "key t6"}, 
                             React.createElement("span", {className: "words"}, "流水线"), 
                             React.createElement("span", {className: "word w1"}, "流"), React.createElement("span", {className: "word w2"}, "水"), React.createElement("span", {className: "word w3"}, "线")
                         ), 
-                        React.createElement("a", {href: "#", className: "key t7", onMouseDown: that.handleKeyActive.bind(null,"confuse")}, "迷茫"), 
-                        React.createElement("a", {href: "#", className: "key t8", onMouseDown: that.handleKeyActive.bind(null,"lonely")}, "孤独"), 
-                        React.createElement("a", {href: "#", className: "key t9"}, "WOW"), 
-                        React.createElement("a", {href: "#", className: "key t10", onMouseDown: that.handleKeyActive.bind(null,"LOL")}, "LOL"), 
-                        React.createElement("a", {href: "#", className: "key t11", onMouseDown: that.handleKeyActive.bind(null,"universityStudent")}, "大学生"), 
-                        React.createElement("a", {href: "#", className: "key t12"}, "考研"), 
-                        React.createElement("a", {href: "#", className: "key t13"}, "恐惧")
+                        React.createElement("a", {className: "key t7", onMouseDown: that.handleKeyActive.bind(null,"confuse")}, "迷茫"), 
+                        React.createElement("a", {className: "key t8", onMouseDown: that.handleKeyActive.bind(null,"lonely")}, "孤独"), 
+                        React.createElement("a", {className: "key t9"}, "WOW"), 
+                        React.createElement("a", {className: "key t10", onMouseDown: that.handleKeyActive.bind(null,"LOL")}, "LOL"), 
+                        React.createElement("a", {className: "key t11", onMouseDown: that.handleKeyActive.bind(null,"universityStudent")}, "大学生"), 
+                        React.createElement("a", {className: "key t12"}, "考研"), 
+                        React.createElement("a", {className: "key t13", onMouseDown: that.handleKeyActive.bind(null,"fear")}, "恐惧")
                     )
-                )
+                ));
 
                 break;
+            case "IDL":
+                var con = (
+                    React.createElement("div", {className: "idl-video-wrapper"}, 
+                        React.createElement("a", {className: "dian b idl-link", href: "http://idhut.cn"}), 
+                        React.createElement("div", {className: "idl-video"}, 
+                                React.createElement("iframe", {height: "520", width: "720", src: "http://player.youku.com/embed/XNjUwNTA1NTg4", frameBorder: "0", allowFullScreen: true})
+                        )
+                    ));
+                break;
             default :
-                var con=React.createElement("div", null, 
+                var con= (React.createElement("div", null, 
                             React.createElement("p", null, "还在构思、实现，敬请期待。"), 
                             React.createElement("p", null, "联系欢迎添加微信，无聊也可以看看我的文章:)"), 
                             React.createElement("img", {src: "images/myQRcode.png", alt: "wechat-qr-code"})
-                        )
+                        ));
 
                 break;
 
@@ -581,77 +598,77 @@ ME.timeLineArea = [{
     itemName: "blue apple",
     title: "加入<br />蓝苹果社团",
     time: "2012-10",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "DMA",
     title: "变更专业<br />数字媒体艺术",
     time: "2013-06",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "IDL",
     title: "进入IDL<br />创新设计实验室",
     time: "2013-07",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "join OKmemo",
     title: "参与IDL项目<br />OK记",
     time: "2013-12",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "learn in OKmemo",
     title: "观察学习<br />OK记设计助理",
     time: "2014-02",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "do simple job in OKmemo",
     title: "OK记移动端<br />输出设计规范稿",
     time: "2014-07",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "learn HTML",
     title: "学习<br />前端入门知识",
     time: "2014-08",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "OKmemo backstage management",
     title: "设计并前端实现<br />OK记后台管理",
     time: "2014-09",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "OKmemo mobile front-end",
     title: "参与实现OK记移动端<br />部分前端工作",
     time: "2014-09",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "OKmemo community front-end",
     title: "参与实现OK记<br />第一版社区的样式部分前端工作",
     time: "2014-09",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "Pocket Travel",
     title: "进行模拟项目<br />“口袋旅游”",
     time: "2015-07",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "join quickwis",
     title: "到长沙快智网络科技有限公司实习",
     time: "2015-09",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "OKmemo UX",
     title: "OK记交互设计师",
     time: "2015-09",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "OKmemo mobile2.0",
     title: "设计OK记移动端<br />新版风格交互",
     time: "2016-02",
-    dec: ""
+    dec: "frozen"
 },{
     itemName: "study at home",
     title: "在家自学<br />待业/待毕业",
     time: "present",
-    dec: ""
+    dec: "frozen"
 }];
 
 
@@ -738,9 +755,9 @@ var TimeLineArea = React.createClass({displayName: "TimeLineArea",
         var dots = this.props.items.map(function(item,i){
 
             return(
-                React.createElement("div", {className: "timeline-dot", key: i}, 
+                React.createElement("div", {className: "timeline-dot "+(item.dec), key: i}, 
                     /*bind不懂，为什么顺序是这样的*/
-                    React.createElement("a", {href: "#", className: "dot", onClick: that.handleShowCon.bind(that,item.itemName)}), 
+                    React.createElement("a", {href: "#", className: "dian dot", onClick: that.handleShowCon.bind(that,item.itemName)}), 
                     React.createElement("div", {className: "dot-intro"}, 
                         React.createElement("div", {className: "dot-time"}, item.time), 
                         React.createElement("div", {className: "dot-title"})
