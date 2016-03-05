@@ -9,7 +9,7 @@ $(function(){
 
 
     if($("body").hasClass("touch-device")){
-        window.location.href = window.location.pathname + "mobile";
+        window.location.href = window.location.host + "/mobile";
     }
 
 
