@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testAHref</title>
+    <style>
+        a{
+            margin-left: 200px;
+        }
+    </style>
+</head>
+<body>
+    <a id="test" href="/mobile">test</a>
+</body>
+
+    <script>
+        window.onload = function(){
+            var test = document.getElementById("test");
+            test.addEventListener("click",function(event){
+                console.log(event);
+//                event.preventDefault();
+            }, false);
+        };
+    </script>
+</html>

@@ -3,8 +3,6 @@
  */
 
 //DATE
-
-
 ME.timeLineArea = [{
     itemName: "HUT",
     title: "湖南工业大学<br />包装工程 大一",
@@ -24,7 +22,7 @@ ME.timeLineArea = [{
     itemName: "IDL",
     title: "进入IDL<br />创新设计实验室",
     time: "2013-07",
-    dec: "frozen"
+    dec: ""
 },{
     itemName: "join OKmemo",
     title: "参与IDL项目<br />OK记",
