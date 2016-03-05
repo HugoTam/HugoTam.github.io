@@ -6,17 +6,17 @@ var ME = {};
 
 //DATA
 ME.papers = [{
-    title: "辞(ren)职(xing)一个月状况",
-    createTime: "2016.03.05",
-    author: "",
-    type: "experience",
-    summary: ""
+    //title: "辞(ren)职(xing)一个月状况",
+    //createTime: "2016.03.05",
+    //author: "",
+    //type: "experience",
+    //summary: ""
 },{
-    title: "放假某日逛购书中心思考",
-    createTime: "2016.02.10",
-    author: "",
-    type: "experience",
-    summary: "你的问题主要在于读书不多而想得太多"
+    //title: "放假某日逛购书中心思考",
+    //createTime: "2016.02.10",
+    //author: "",
+    //type: "experience",
+    //summary: "你的问题主要在于读书不多而想得太多"
 },{
     title: "建站初衷",
     createTime: "2016.02.28",
