@@ -151,9 +151,10 @@ var BlogContent = React.createClass({
         this.setSummaryHeight();
 
         //滑到刚打开文章的顶部
-        $("body").animate({
-            scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
-        },300);
+            $("body").animate({
+                scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
+            },300);
+        
 
         //去掉类
         $papersWrapper.find(".read-this").removeClass("read-this");

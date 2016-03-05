@@ -121,19 +121,27 @@ var PaperContent = React.createClass({displayName: "PaperContent",
 
         $(window).on("mousedown",this.delayDetectSelectText);
         $(window).on("mouseup",this.detectSelectText);
+
+        $(".nav a.item.blog").on("click",this.handleReturnBlog);
     },
 
     componentDidUpdate: function(){
         this.getPaperContent();
+
+        $(".nav a.item.blog").on("click",this.handleReturnBlog);
 
         $(window).on("mousedown",this.delayDetectSelectText);
         $(window).on("mouseup",this.detectSelectText);
     },
 
     componentWillUnmount: function(){
+
+        $(".nav a.item.blog").off("click",this.handleReturnBlog);
+
         //解除绑定
         $(window).off("mousedown",this.delayDetectSelectText);
         $(window).off("mouseup",this.detectSelectText);
+
     },
 
     getPaperContent: function(){
@@ -148,6 +156,7 @@ var PaperContent = React.createClass({displayName: "PaperContent",
 
     },
 
+
     detectSelectText: function(){
         var selectText = window.getSelection().toString();
         if(selectText && ReactDOM.findDOMNode(this.refs.paperCon)){
@@ -159,7 +168,6 @@ var PaperContent = React.createClass({displayName: "PaperContent",
         }else{
             console.log("other");
         }
-        //console.log("delayDetectSelectText "+selectText);
     },
 
     delayDetectSelectText: function(){
@@ -336,9 +344,10 @@ var BlogContent = React.createClass({displayName: "BlogContent",
         this.setSummaryHeight();
 
         //滑到刚打开文章的顶部
-        $("body").animate({
-            scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
-        },300);
+            $("body").animate({
+                scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
+            },300);
+        
 
         //去掉类
         $papersWrapper.find(".read-this").removeClass("read-this");
