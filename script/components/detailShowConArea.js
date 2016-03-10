@@ -7,7 +7,7 @@ var ShowConArea = React.createClass({
     getInitialState: function() {
         return {
             active: false,
-            keyActive: "",
+            keyActive: ""
         }
 
     },
@@ -34,8 +34,7 @@ var ShowConArea = React.createClass({
 
                 var delayTime = i+1;
 
-                var delayUnit = 50;
-
+                var delayUnit = 680;
 
 
                 setTimeout(function(){
@@ -65,7 +64,6 @@ var ShowConArea = React.createClass({
 
 
         if(key){
-
             this.setState({keyActive: key});
             $(keys).addClass("keyactive-"+key);
 
@@ -80,6 +78,13 @@ var ShowConArea = React.createClass({
                     break;
             }
         }
+
+    },
+
+    showImpact: function(){
+        var wrapper = ReactDOM.findDOMNode(this.refs.idlVideoWrapper);
+
+        $(wrapper).addClass("show-impact");
 
     },
 
@@ -115,13 +120,29 @@ var ShowConArea = React.createClass({
 
                 break;
             case "IDL":
-                var con = (
-                    <div className="idl-video-wrapper">
-                        <a className="dian b idl-link" href="http://idhut.cn"></a>
-                        <div className="idl-video">
-                                <iframe height="520" width="720" src="http://player.youku.com/embed/XNjUwNTA1NTg4" frameBorder="0" allowFullScreen></iframe>
-                        </div>
-                    </div>);
+                var con = (<div ref="idlVideoWrapper" className="idl-video-wrapper">
+                            <a className="dian b idl-link" target="_blank" href="http://idhut.cn"></a>
+                            <a className="dian r impact-link" href="#" onClick={that.showImpact}></a>
+                            <div ref="idlVideo" className="idl-video">
+                                    <div className="loading-wrapper">
+                                        <div className="ani-1"></div>
+                                        <div className="ani-2"></div>
+                                        <div className="ani-3"></div>
+                                        <div className="ani-4"></div>
+                                        <div className="ani-5"></div>
+                                    </div>
+                                    <iframe height="520" width="720" src="http://player.youku.com/embed/XNjUwNTA1NTg4" frameBorder="0" allowFullScreen></iframe>
+                            </div>
+                            <div className="impact">
+                                <div className="select-wrapper">
+                                    <div className="member">
+                                        <div className="avatar"></div>
+                                        <div className="name">张浪浪</div>
+                                    </div>
+                                </div>
+                                <div className="impact-con"></div>
+                            </div>
+                        </div>);
                 break;
             default :
                 var con= (<div>

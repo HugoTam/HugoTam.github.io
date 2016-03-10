@@ -108,6 +108,7 @@ var BlogContent = React.createClass({
 
     },
 
+    //阅读blog
     handleReadPaper: function(paper,event){
         event.preventDefault();
 
@@ -136,6 +137,7 @@ var BlogContent = React.createClass({
 
     },
 
+    // blog返回
     handleReturnBlog: function(event){
 
         event.preventDefault();
@@ -148,16 +150,22 @@ var BlogContent = React.createClass({
         });
         var $papersWrapper = $(ReactDOM.findDOMNode(this.refs.papersWrapper));
         $papersWrapper.removeClass("read-paper will-read-paper");
+        //增加临时类，添加动画
+        $papersWrapper.addClass("will-return");
         this.setSummaryHeight();
 
         //滑到刚打开文章的顶部
-            $("body").animate({
-                scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
-            },300);
-        
+        $("body").animate({
+            scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
+        },300);
+
+
 
         //去掉类
-        $papersWrapper.find(".read-this").removeClass("read-this");
+        setTimeout(function(){
+            $papersWrapper.removeClass("will-return");
+            $papersWrapper.find(".read-this").removeClass("read-this");
+        },300);
 
     },
 

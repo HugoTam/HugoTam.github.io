@@ -21,17 +21,17 @@ var MeContent = React.createClass({
                     <span>(谭什么)</span>
                 </div>
                 {/*经历*/}
-                <div className="simple-exp">
+                {/*<div className="simple-exp">
                     <p><span className="exp-time">2012.09 -- present.</span>湖南工业大学 本科 数字媒体艺术</p>
                     <p><span className="exp-time">2013.07 -- present.</span>湖南工业大学 <a href="http:idhut.cn">创新设计实验室</a></p>
                     <p><span className="exp-time">2014.?? -- 2016.02</span><a href="http://quickwis.com/">长沙快智OK记</a> 产品/设计/前端打杂</p>
-                </div>
+                </div>*/}
                 {/*标签*/}
                 <div className="tags">{myTags}</div>
                 {/*分割线*/}
                 <div className="di-line"></div>
             </div>
-            <div className="contact-wrapper">
+            {/*<div className="contact-wrapper">
                 <h1 className="title">联系</h1>
                 <div className="contact-list">
                     <div className="email">邮箱：<a href="#">hugotammmm@gmail.com</a></div>
@@ -43,7 +43,7 @@ var MeContent = React.createClass({
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*/}
         </div>
     }
 

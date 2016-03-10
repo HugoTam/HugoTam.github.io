@@ -616,6 +616,7 @@ dialog::backdrop {
 /*自定义样式*/
 /*闪动的点dian*/
 .dian{
+    position: relative;
     display: inline-block;
     background: #46454C;
     width: 10px;
@@ -637,6 +638,10 @@ dialog::backdrop {
     transform: scale(1.6);
 }
 
+.dian.r,.dian.r::after{
+    background: #CF0207;
+}
+
 .dian.b,.dian.b::after{
     background: #0290E9;
 }
@@ -646,6 +651,7 @@ dialog::backdrop {
     animation: scaleOpa 1.2s infinite ease;
 }
 
+/*diandian动画*/
 @keyframes scaleOpa {
     0%{transform: scale(1.6);opacity: .35;}
     100%{transform: scale(3);opacity: 0;}
@@ -654,4 +660,20 @@ dialog::backdrop {
 @-webkit-keyframes scaleOpa {
     0%{-webkit-transform: scale(1.6);opacity: .35;}
     100%{-webkit-transform: scale(3);opacity: 0;}
+}
+
+/*loading动画*/
+@-webkit-keyframes stretchdelay {
+    0%, 40%, 100% { -webkit-transform: scaleY(.6) }
+    20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(.6);
+        -webkit-transform: scaleY(.6);
+    }  20% {
+           transform: scaleY(1.0);
+           -webkit-transform: scaleY(1.0);
+       }
 }

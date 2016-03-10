@@ -112,10 +112,11 @@ var Content = React.createClass({
                 paper={this.props.paper}
                 />;
         }else{
-            con = <ExpContent
-                getSkillsTree={this.props.getSkillsTree}
-                getMyTags={this.props.getMyTags}
-                />;
+            //con = <ExpContent
+            //    getSkillsTree={this.props.getSkillsTree}
+            //    getMyTags={this.props.getMyTags}
+            //    />;
+            con = <BlogContent />;
         }
 
         return <div className="content-wrapper">

@@ -90,7 +90,7 @@ var Header = React.createClass({displayName: "Header",
             React.createElement("div", {className: "nav"}, 
                 React.createElement("div", {className: "left-side "+this.props.activeView+"-active"}, 
                     React.createElement("a", {href: "#blog", className: "item blog", onClick: this.handleClickBlog}, React.createElement("span", null, "BLOG")), 
-                    React.createElement("a", {href: "#exp", className: "item exp", onClick: this.handleClickExp}, React.createElement("span", null, "EXP")), 
+                    /*<a href="#exp" className="item exp" onClick={this.handleClickExp}><span>EXP</span></a>*/
                     React.createElement("a", {href: "#me", className: "item me", onClick: this.handleClickMe}, React.createElement("span", null, "ME"))
                 ), 
                 React.createElement("div", {className: "right-side"}, 
@@ -301,6 +301,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
     },
 
+    //阅读blog
     handleReadPaper: function(paper,event){
         event.preventDefault();
 
@@ -329,6 +330,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
     },
 
+    // blog返回
     handleReturnBlog: function(event){
 
         event.preventDefault();
@@ -341,16 +343,22 @@ var BlogContent = React.createClass({displayName: "BlogContent",
         });
         var $papersWrapper = $(ReactDOM.findDOMNode(this.refs.papersWrapper));
         $papersWrapper.removeClass("read-paper will-read-paper");
+        //增加临时类，添加动画
+        $papersWrapper.addClass("will-return");
         this.setSummaryHeight();
 
         //滑到刚打开文章的顶部
-            $("body").animate({
-                scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
-            },300);
-        
+        $("body").animate({
+            scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
+        },300);
+
+
 
         //去掉类
-        $papersWrapper.find(".read-this").removeClass("read-this");
+        setTimeout(function(){
+            $papersWrapper.removeClass("will-return");
+            $papersWrapper.find(".read-this").removeClass("read-this");
+        },300);
 
     },
 
@@ -433,29 +441,29 @@ var MeContent = React.createClass({displayName: "MeContent",
                     React.createElement("span", null, "(谭什么)")
                 ), 
                 /*经历*/
-                React.createElement("div", {className: "simple-exp"}, 
-                    React.createElement("p", null, React.createElement("span", {className: "exp-time"}, "2012.09 -- present."), "湖南工业大学 本科 数字媒体艺术"), 
-                    React.createElement("p", null, React.createElement("span", {className: "exp-time"}, "2013.07 -- present."), "湖南工业大学 ", React.createElement("a", {href: "http:idhut.cn"}, "创新设计实验室")), 
-                    React.createElement("p", null, React.createElement("span", {className: "exp-time"}, "2014.?? -- 2016.02"), React.createElement("a", {href: "http://quickwis.com/"}, "长沙快智OK记"), " 产品/设计/前端打杂")
-                ), 
+                /*<div className="simple-exp">
+                    <p><span className="exp-time">2012.09 -- present.</span>湖南工业大学 本科 数字媒体艺术</p>
+                    <p><span className="exp-time">2013.07 -- present.</span>湖南工业大学 <a href="http:idhut.cn">创新设计实验室</a></p>
+                    <p><span className="exp-time">2014.?? -- 2016.02</span><a href="http://quickwis.com/">长沙快智OK记</a> 产品/设计/前端打杂</p>
+                </div>*/
                 /*标签*/
                 React.createElement("div", {className: "tags"}, myTags), 
                 /*分割线*/
                 React.createElement("div", {className: "di-line"})
-            ), 
-            React.createElement("div", {className: "contact-wrapper"}, 
-                React.createElement("h1", {className: "title"}, "联系"), 
-                React.createElement("div", {className: "contact-list"}, 
-                    React.createElement("div", {className: "email"}, "邮箱：", React.createElement("a", {href: "#"}, "hugotammmm@gmail.com")), 
-                    React.createElement("div", {className: "weibo"}, "微博：", React.createElement("a", {href: "http://weibo.com/cupxxx"}, "谭什么鬼")), 
-                    React.createElement("div", {className: "wechat"}, "微信：", 
-                        React.createElement("div", {className: "wechat-info"}, 
-                            React.createElement("img", {src: "images/myQRcode.png", alt: "QRCode"}), 
-                            React.createElement("span", {className: "tips"}, "(加好友请注明来意)")
-                        )
-                    )
-                )
             )
+            /*<div className="contact-wrapper">
+                <h1 className="title">联系</h1>
+                <div className="contact-list">
+                    <div className="email">邮箱：<a href="#">hugotammmm@gmail.com</a></div>
+                    <div className="weibo">微博：<a href="http://weibo.com/cupxxx">谭什么鬼</a></div>
+                    <div className="wechat">微信：
+                        <div className="wechat-info">
+                            <img src="images/myQRcode.png" alt="QRCode"/>
+                            <span className="tips">(加好友请注明来意)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>*/
         )
     }
 
@@ -469,7 +477,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
     getInitialState: function() {
         return {
             active: false,
-            keyActive: "",
+            keyActive: ""
         }
 
     },
@@ -496,8 +504,7 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
                 var delayTime = i+1;
 
-                var delayUnit = 50;
-
+                var delayUnit = 680;
 
 
                 setTimeout(function(){
@@ -527,7 +534,6 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
 
         if(key){
-
             this.setState({keyActive: key});
             $(keys).addClass("keyactive-"+key);
 
@@ -542,6 +548,13 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
                     break;
             }
         }
+
+    },
+
+    showImpact: function(){
+        var wrapper = ReactDOM.findDOMNode(this.refs.idlVideoWrapper);
+
+        $(wrapper).addClass("show-impact");
 
     },
 
@@ -577,13 +590,29 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
                 break;
             case "IDL":
-                var con = (
-                    React.createElement("div", {className: "idl-video-wrapper"}, 
-                        React.createElement("a", {className: "dian b idl-link", href: "http://idhut.cn"}), 
-                        React.createElement("div", {className: "idl-video"}, 
-                                React.createElement("iframe", {height: "520", width: "720", src: "http://player.youku.com/embed/XNjUwNTA1NTg4", frameBorder: "0", allowFullScreen: true})
-                        )
-                    ));
+                var con = (React.createElement("div", {ref: "idlVideoWrapper", className: "idl-video-wrapper"}, 
+                            React.createElement("a", {className: "dian b idl-link", target: "_blank", href: "http://idhut.cn"}), 
+                            React.createElement("a", {className: "dian r impact-link", href: "#", onClick: that.showImpact}), 
+                            React.createElement("div", {ref: "idlVideo", className: "idl-video"}, 
+                                    React.createElement("div", {className: "loading-wrapper"}, 
+                                        React.createElement("div", {className: "ani-1"}), 
+                                        React.createElement("div", {className: "ani-2"}), 
+                                        React.createElement("div", {className: "ani-3"}), 
+                                        React.createElement("div", {className: "ani-4"}), 
+                                        React.createElement("div", {className: "ani-5"})
+                                    ), 
+                                    React.createElement("iframe", {height: "520", width: "720", src: "http://player.youku.com/embed/XNjUwNTA1NTg4", frameBorder: "0", allowFullScreen: true})
+                            ), 
+                            React.createElement("div", {className: "impact"}, 
+                                React.createElement("div", {className: "select-wrapper"}, 
+                                    React.createElement("div", {className: "member"}, 
+                                        React.createElement("div", {className: "avatar"}), 
+                                        React.createElement("div", {className: "name"}, "张浪浪")
+                                    )
+                                ), 
+                                React.createElement("div", {className: "impact-con"})
+                            )
+                        ));
                 break;
             default :
                 var con= (React.createElement("div", null, 
@@ -610,48 +639,33 @@ var ShowConArea = React.createClass({displayName: "ShowConArea",
 
 //DATE
 ME.timeLineArea = [{
-    itemName: "HUT",
-    title: "湖南工业大学<br />包装工程 大一",
-    time:   "2012-09",
-    dec: ""
-},{
-    itemName: "blue apple",
-    title: "加入<br />蓝苹果社团",
-    time: "2012-10",
+    itemName: "study at home",
+    title: "在家自学<br />待业/待毕业",
+    time: "present",
     dec: "frozen"
 },{
-    itemName: "DMA",
-    title: "变更专业<br />数字媒体艺术",
-    time: "2013-06",
+    itemName: "OKmemo mobile2.0",
+    title: "设计OK记移动端<br />新版风格交互",
+    time: "2016-02",
     dec: "frozen"
 },{
-    itemName: "IDL",
-    title: "进入IDL<br />创新设计实验室",
-    time: "2013-07",
-    dec: ""
-},{
-    itemName: "join OKmemo",
-    title: "参与IDL项目<br />OK记",
-    time: "2013-12",
+    itemName: "OKmemo UX",
+    title: "OK记交互设计师",
+    time: "2015-09",
     dec: "frozen"
 },{
-    itemName: "learn in OKmemo",
-    title: "观察学习<br />OK记设计助理",
-    time: "2014-02",
+    itemName: "join quickwis",
+    title: "到长沙快智网络科技有限公司实习",
+    time: "2015-09",
     dec: "frozen"
 },{
-    itemName: "do simple job in OKmemo",
-    title: "OK记移动端<br />输出设计规范稿",
-    time: "2014-07",
+    itemName: "Pocket Travel",
+    title: "进行模拟项目<br />“口袋旅游”",
+    time: "2015-07",
     dec: "frozen"
 },{
-    itemName: "learn HTML",
-    title: "学习<br />前端入门知识",
-    time: "2014-08",
-    dec: "frozen"
-},{
-    itemName: "OKmemo backstage management",
-    title: "设计并前端实现<br />OK记后台管理",
+    itemName: "OKmemo community front-end",
+    title: "参与实现OK记<br />第一版社区的样式部分前端工作",
     time: "2014-09",
     dec: "frozen"
 },{
@@ -660,35 +674,50 @@ ME.timeLineArea = [{
     time: "2014-09",
     dec: "frozen"
 },{
-    itemName: "OKmemo community front-end",
-    title: "参与实现OK记<br />第一版社区的样式部分前端工作",
+    itemName: "OKmemo backstage management",
+    title: "设计并前端实现<br />OK记后台管理",
     time: "2014-09",
     dec: "frozen"
 },{
-    itemName: "Pocket Travel",
-    title: "进行模拟项目<br />“口袋旅游”",
-    time: "2015-07",
+    itemName: "learn HTML",
+    title: "学习<br />前端入门知识",
+    time: "2014-08",
     dec: "frozen"
 },{
-    itemName: "join quickwis",
-    title: "到长沙快智网络科技有限公司实习",
-    time: "2015-09",
+    itemName: "do simple job in OKmemo",
+    title: "OK记移动端<br />输出设计规范稿",
+    time: "2014-07",
     dec: "frozen"
 },{
-    itemName: "OKmemo UX",
-    title: "OK记交互设计师",
-    time: "2015-09",
+    itemName: "learn in OKmemo",
+    title: "观察学习<br />OK记设计助理",
+    time: "2014-02",
     dec: "frozen"
 },{
-    itemName: "OKmemo mobile2.0",
-    title: "设计OK记移动端<br />新版风格交互",
-    time: "2016-02",
+    itemName: "join OKmemo",
+    title: "参与IDL项目<br />OK记",
+    time: "2013-12",
     dec: "frozen"
 },{
-    itemName: "study at home",
-    title: "在家自学<br />待业/待毕业",
-    time: "present",
+    itemName: "IDL",
+    title: "进入IDL<br />创新设计实验室",
+    time: "2013-07",
+    dec: ""
+},{
+    itemName: "DMA",
+    title: "变更专业<br />数字媒体艺术",
+    time: "2013-06",
     dec: "frozen"
+},{
+    itemName: "blue apple",
+    title: "加入<br />蓝苹果社团",
+    time: "2012-10",
+    dec: "frozen"
+},{
+    itemName: "HUT",
+    title: "湖南工业大学<br />包装工程 大一",
+    time:   "2012-09",
+    dec: ""
 }];
 
 
@@ -699,7 +728,7 @@ var ExpContent = React.createClass({displayName: "ExpContent",
     getInitialState: function(){
         return {
             items: ME.timeLineArea,
-            showConEvent: "HUT"
+            showConEvent: "IDL"
 
         }
 
@@ -913,10 +942,11 @@ var Content = React.createClass({displayName: "Content",
                 paper: this.props.paper}
                 );
         }else{
-            con = React.createElement(ExpContent, {
-                getSkillsTree: this.props.getSkillsTree, 
-                getMyTags: this.props.getMyTags}
-                );
+            //con = <ExpContent
+            //    getSkillsTree={this.props.getSkillsTree}
+            //    getMyTags={this.props.getMyTags}
+            //    />;
+            con = React.createElement(BlogContent, null);
         }
 
         return React.createElement("div", {className: "content-wrapper"}, 

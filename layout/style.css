@@ -276,10 +276,17 @@ a{
 
 .papers-wrapper .paper-item{
     padding: 20px 0 10px;
-    -webkit-transition: padding .4s;
-    transition: padding .4s;
+    -webkit-transition: padding .4s, opacity .3s;
+    transition: padding .4s, opacity .3s;
     /*padding-bottom: 40px;*/
+}
 
+.papers-wrapper.will-return .paper-item.read-this{
+    opacity: 1;
+}
+
+.papers-wrapper.will-return .paper-item{
+    opacity: 0;
 }
 
 .paper-item .title{
@@ -392,6 +399,7 @@ a{
     opacity: 0;
     font-family: STZhongsong;
     color: #100F17;
+    -webkit-transition: opacity .3s;
     transition: opacity .3s;
 }
 

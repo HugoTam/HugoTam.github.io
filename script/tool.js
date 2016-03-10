@@ -10,6 +10,24 @@ var TamTool = {
         }
 
     },
+    //
+    //showConOneByOne: function(con,target,time){
+    //    var delay = 200;
+    //    if(time){
+    //        if(typeof time == "number"){
+    //            delay = time;
+    //        }else if(time == "fast"){
+    //            delay = 100;
+    //        }
+    //    }
+    //    var $insertDiv = $("div");
+    //
+    //    var $target = $(target);
+    //    setTimeout(function(){
+    //        $target.append($insertDiv.get(0));
+    //    },delay)
+    //
+    //},
 
     isFlashAvailable: function(){
         var hasFlash = false;

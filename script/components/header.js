@@ -90,7 +90,7 @@ var Header = React.createClass({
             <div className="nav">
                 <div className={"left-side "+this.props.activeView+"-active"}>
                     <a href="#blog" className="item blog" onClick={this.handleClickBlog}><span>BLOG</span></a>
-                    <a href="#exp" className="item exp" onClick={this.handleClickExp}><span>EXP</span></a>
+                    {/*<a href="#exp" className="item exp" onClick={this.handleClickExp}><span>EXP</span></a>*/}
                     <a href="#me" className="item me" onClick={this.handleClickMe}><span>ME</span></a>
                 </div>
                 <div className="right-side">
