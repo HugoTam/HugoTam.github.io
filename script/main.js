@@ -6,6 +6,12 @@ var ME = {};
 
 //DATA
 ME.papers = [{
+    title: "逛购书中心途中胡思乱想&自习室发呆",
+    createTime: "2016.02.10",
+    author: "Hugo Tam",
+    type: "writing",
+    summary: "没有书籍的无聊日子。"
+},{
     title: "建站初衷",
     createTime: "2016.02.28",
     author: "Hugo Tam",
