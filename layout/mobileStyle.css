@@ -23,7 +23,9 @@
 }
 
 .content-wrapper .paper-item{
-    margin-bottom: 32px;
+    padding-bottom: 32px;
+    -webkit-transition: height .4s, opacity .3s, padding .4s;
+    transition: height .4s, opacity .3s, padding .4s;
 }
 
 .paper-item .title a{
@@ -34,4 +36,45 @@
 
 .paper-item .info{
     display: none;
+}
+
+/*read paper*/
+.papers-wrapper.will-read-paper .paper-item .title{
+    opacity: 0;
+    height: 0;
+}
+
+.papers-wrapper.will-read-paper .paper-item{
+    padding: 0;
+}
+
+.papers-wrapper.will-read-paper .paper-item.read-this{
+    padding: 10px 0 20px;
+}
+
+.papers-wrapper.will-read-paper .paper-item.read-this .title{
+    padding: 20px 0 0;
+    line-height: 20px;
+    height: auto;
+    opacity: 1;
+}
+
+.papers-wrapper .paper-item .summary-h{
+    -webkit-transition: height .4s, opacity .3s;
+    transition: height .4s, opacity .3s;
+}
+
+.papers-wrapper.will-read-paper .paper-item .summary-h{
+    opacity: 0;
+    height: 0;
+}
+
+
+.papers-wrapper.read-paper .paper-item,
+.papers-wrapper.read-paper .paper-item.read-this .summary-h{
+    display: none;
+}
+
+.papers-wrapper.read-paper .paper-item.read-this{
+    display: block;
 }
