@@ -1,3 +1,37 @@
-.title{
-    font-family: STZhongsong,"楷体";
+.wrapper{
+    padding: 0 16px;
+}
+
+.header-wrapper{
+    padding: 6px 0;
+    border-bottom: thin solid #F3F3F3;
+}
+
+.header-wrapper .item{
+    color: #100F17;
+    padding-right: 30px;
+}
+
+.header-wrapper .item.active::after{
+    content: "/#";
+    position: absolute;
+    opacity: .4;
+}
+
+.content-wrapper{
+    padding: 22px 0;
+}
+
+.content-wrapper .paper-item{
+    margin-bottom: 32px;
+}
+
+.paper-item .title a{
+    font-size: 20px;
+    line-height: 1.4em;
+    color: #100F17;
+}
+
+.paper-item .info{
+    display: none;
 }
