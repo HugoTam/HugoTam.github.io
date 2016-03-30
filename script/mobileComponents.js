@@ -1,24 +1,6 @@
 /**
  * Created by hugotam on 16/3/29.
  */
-var Header = React.createClass({displayName: "Header",
-    //传递点击的值
-    handleSetView: function(view){
-        this.props.setView(view);
-    },
-
-    render: function(){
-        return React.createElement("div", {className: "header-wrapper"}, 
-            React.createElement("div", {className: "items-wrapper"}, 
-                React.createElement("a", {href: "#", className: "item", onClick: this.handleSetView.bind(null,"blog")}, "BLOG"), 
-                React.createElement("a", {href: "#", className: "item", onClick: this.handleSetView.bind(null,"me")}, "ME")
-            )
-        );
-    }
-});
-/**
- * Created by hugotam on 16/3/29.
- */
 var PaperContent = React.createClass({displayName: "PaperContent",
     getPaperContent: function(){
         var createTime = TamTool.transformCreateTime(this.props.readPaper.createTime);
@@ -65,8 +47,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
     getInitialState: function(){
         return{
             papers: ME.papers,
-            readPaper: {},
-            didReadPaper: this.props.didReadPaper
+            readPaper: {}
         }
     },
 
@@ -86,16 +67,11 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
     },
 
-    // blog返回
-    handleReturnBlog: function(event){
-
-        event.preventDefault();
-
+    returnBlog: function(){
         window.location.hash = "#blog";
 
         this.setState({
-            readPaper: {},
-            didReadPaper: false
+            readPaper: {}
         });
 
 
@@ -119,6 +95,15 @@ var BlogContent = React.createClass({displayName: "BlogContent",
             $papersWrapper.find(".read-this").removeClass("read-this");
         },300);
 
+        this.props.setView("blog");
+    },
+
+    // blog返回
+    handleReturnBlog: function(event){
+
+        event.preventDefault();
+        this.returnBlog();
+
     },
 
     //阅读blog
@@ -128,11 +113,11 @@ var BlogContent = React.createClass({displayName: "BlogContent",
         window.location.hash = "#paper" + TamTool.transformCreateTime(paper.createTime);
 
         this.setState({
-            readPaper: paper,
-            didReadPaper: true
+            readPaper: paper
         });
 
-        //this.props.setView("paper");
+        this.props.setView("paper");
+        //console.log(this.props.setView);
 
         var papersWrapper = ReactDOM.findDOMNode(this.refs.papersWrapper);
         papersWrapper.classList.add("will-read-paper");
@@ -172,10 +157,9 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
         var paper;
 
-        if(that.state.didReadPaper){
+        if(that.props.view == "paper"){
             paper = (React.createElement(PaperContent, {
                 readPaper: that.state.readPaper, 
-                didReadPaper: that.state.didReadPaper, 
                 handleReturn: that.handleReturnBlog}
                 ));
         }
@@ -202,25 +186,94 @@ var MeContent = React.createClass({displayName: "MeContent",
 /**
  * Created by hugotam on 16/3/29.
  */
+var Header = React.createClass({displayName: "Header",
+    //传递点击的值
+    handleSetView: function(view){
+        //在blog中返回
+        if(this.props.view == "paper" && view == "blog"){
+            this.returnBlog();
+        }
+
+        this.props.setView(view);
+    },
+
+    returnBlog: function(){
+        window.location.hash = "#blog";
+
+        var $papersWrapper = $(".papers-wrapper");
+        $papersWrapper.removeClass("read-paper will-read-paper");
+        //增加临时类，添加动画
+        $papersWrapper.addClass("will-return");
+
+        this.setSummaryHeight();
+
+        //滑到刚打开文章的顶部
+        //$("body").animate({
+        //    scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
+        //},300);
+        //
+
+        //去掉类
+        setTimeout(function(){
+            $papersWrapper.removeClass("will-return");
+            $papersWrapper.find(".read-this").removeClass("read-this");
+        },300);
+
+        this.props.setView("blog");
+    },
+
+    //为summary赋高度值或清零
+    setSummaryHeight: function(clean){
+        var $summaryH = $(".summary-h");
+
+        if(!clean){
+            $summaryH.each(function(){
+                $(this).height($(this).height());
+            });
+        }else{
+            $summaryH.each(function(){
+                $(this).css("height","");
+            });
+        }
+
+    },
+
+    render: function(){
+        return React.createElement("div", {className: "header-wrapper"}, 
+            React.createElement("div", {className: "items-wrapper"}, 
+                React.createElement("a", {href: "#", className: "item", onClick: this.handleSetView.bind(null,"blog")}, "BLOG"), 
+                React.createElement("a", {href: "#", className: "item", onClick: this.handleSetView.bind(null,"me")}, "ME")
+            )
+        );
+    }
+});
+/**
+ * Created by hugotam on 16/3/29.
+ */
 
 var BlogWrapper = React.createClass({displayName: "BlogWrapper",
 
     getInitialState: function(){
-
         return {
-            view: "",
+            view: "me",
             paper: ""
         }
     },
 
     setView: function(view){
+        var wrapper = ReactDOM.findDOMNode(this.refs.wrapper);
+
+        if(this.state.view){
+            wrapper.classList.remove(this.state.view);
+        }
+        wrapper.classList.add(view);
         this.setState({
             view: view
         });
     },
 
     render: function(){
-        return React.createElement("div", {className: "wrapper"}, 
+        return React.createElement("div", {ref: "wrapper", className: "wrapper"}, 
             React.createElement(Header, {
                 view: this.state.view, 
                 setView: this.setView}
@@ -240,18 +293,21 @@ var Content = React.createClass({displayName: "Content",
         var con;
         var that = this;
 
+        console.log("content: "+this.props.view);
+
         switch(this.props.view){
             case "me":
                 con = React.createElement(MeContent, null);
                 break;
             case "blog":
                 con = React.createElement(BlogContent, {
+                    view: that.props.view, 
                     setView: that.props.setView}
                     );
                 break;
             case "paper":
                 con = React.createElement(BlogContent, {
-                    didReadPaper: true, 
+                    view: that.props.view, 
                     setView: that.props.setView}
                     );
                 break;
