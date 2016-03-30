@@ -1,7 +1,3 @@
-a{
-    color: #100F17;
-}
-
 #container{
     min-width: 1080px;
     position: relative;
@@ -375,6 +371,7 @@ a{
 }
 
 .papers-wrapper .paper-item .summary-h{
+    -webkit-transition: height .4s, opacity .3s;
     transition: height .4s, opacity .3s;
 }
 

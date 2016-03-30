@@ -60,6 +60,10 @@ a:active {
 /**
  * 去掉点击时的焦点框，同时保证使用键盘可以显示焦点框
  */
+a{
+    color: #100F17;
+}
+
 a:active,
 a:hover {
     outline: 0 none;

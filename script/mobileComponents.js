@@ -51,29 +51,47 @@ var BlogContent = React.createClass({displayName: "BlogContent",
         }
     },
 
+    //缩减summary字数，太懒
+    limitSummaryLength: function(){
+        for(i=0;i<ME.papers.length;i++){
+            var summary = ME.papers[i].summary;
+            var defaultSummary = "暂时还没想好......";
+            if(summary.length>120){
+                ME.papers[i].summary = summary.substr(0,120);
+            }else if(summary == ""){
+                ME.papers[i].summary = defaultSummary;
+            }
+        }
+    },
+
     //为summary赋高度值或清零
-    setSummaryHeight: function(clean){
+    setSummaryHeight: function(zero){
         var $summaryH = $(".summary-h");
 
-        if(!clean){
+        if(!zero){
             $summaryH.each(function(){
-                $(this).height($(this).height());
+                $(this).height($(this).find(".summary").height());
             });
         }else{
+            console.log("run");
             $summaryH.each(function(){
-                $(this).css("height","");
+                $(this).css("height","0");
             });
         }
 
     },
 
+    componentWillMount: function(){
+        this.limitSummaryLength();
+    },
+
+    componentDidMount: function(){
+        this.setSummaryHeight();
+    },
+
     returnBlog: function(){
+        var that = this;
         window.location.hash = "#blog";
-
-        this.setState({
-            readPaper: {}
-        });
-
 
         var $papersWrapper = $(ReactDOM.findDOMNode(this.refs.papersWrapper));
         $papersWrapper.removeClass("read-paper will-read-paper");
@@ -82,17 +100,22 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
         this.setSummaryHeight();
 
-        //滑到刚打开文章的顶部
-        $("body").animate({
-            scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
-        },300);
-
-
-
         //去掉类
         setTimeout(function(){
-            $papersWrapper.removeClass("will-return");
-            $papersWrapper.find(".read-this").removeClass("read-this");
+            //滑到刚打开文章的顶部
+            $("body").animate({
+                scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
+            },600);
+
+            that.setState({
+                readPaper: {}
+            });
+
+            setTimeout(function(){
+                $papersWrapper.find(".read-this").removeClass("read-this");
+                $papersWrapper.removeClass("will-return");
+            }, 300);
+
         },300);
 
         this.props.setView("blog");
@@ -108,6 +131,7 @@ var BlogContent = React.createClass({displayName: "BlogContent",
 
     //阅读blog
     handleReadPaper: function(paper,event){
+        var that = this;
         event.preventDefault();
 
         window.location.hash = "#paper" + TamTool.transformCreateTime(paper.createTime);
@@ -117,18 +141,17 @@ var BlogContent = React.createClass({displayName: "BlogContent",
         });
 
         this.props.setView("paper");
-        //console.log(this.props.setView);
 
         var papersWrapper = ReactDOM.findDOMNode(this.refs.papersWrapper);
         papersWrapper.classList.add("will-read-paper");
 
         var $paperItem = $(event.target).parents(".paper-item");
         $paperItem.addClass("read-this");
-        this.setSummaryHeight(true);
 
         setTimeout(function(){
             papersWrapper.classList.add("read-paper");
-        },400);
+            that.setSummaryHeight(true);
+        },250);
 
         //滑到顶部
         $("body").animate({
@@ -197,6 +220,22 @@ var Header = React.createClass({displayName: "Header",
         this.props.setView(view);
     },
 
+    //为summary赋高度值或清零
+    setSummaryHeight: function(zero){
+        var $summaryH = $(".summary-h");
+        if(!zero){
+            $summaryH.each(function(){
+                console.log(" fuck run");
+                $(this).height($(this).find(".summary").height());
+            });
+        }else{
+            $summaryH.each(function(){
+                $(this).css("height","0");
+            });
+        }
+
+    },
+
     returnBlog: function(){
         window.location.hash = "#blog";
 
@@ -207,36 +246,18 @@ var Header = React.createClass({displayName: "Header",
 
         this.setSummaryHeight();
 
-        //滑到刚打开文章的顶部
-        //$("body").animate({
-        //    scrollTop: ($papersWrapper.find(".read-this").offset().top-100)
-        //},300);
-        //
 
         //去掉类
         setTimeout(function(){
-            $papersWrapper.removeClass("will-return");
+
             $papersWrapper.find(".read-this").removeClass("read-this");
+            $papersWrapper.removeClass("will-return");
+
         },300);
 
         this.props.setView("blog");
     },
 
-    //为summary赋高度值或清零
-    setSummaryHeight: function(clean){
-        var $summaryH = $(".summary-h");
-
-        if(!clean){
-            $summaryH.each(function(){
-                $(this).height($(this).height());
-            });
-        }else{
-            $summaryH.each(function(){
-                $(this).css("height","");
-            });
-        }
-
-    },
 
     render: function(){
         return React.createElement("div", {className: "header-wrapper"}, 
@@ -255,7 +276,7 @@ var BlogWrapper = React.createClass({displayName: "BlogWrapper",
 
     getInitialState: function(){
         return {
-            view: "me",
+            view: "blog",
             paper: ""
         }
     },
