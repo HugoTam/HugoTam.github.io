@@ -20,6 +20,7 @@
 
 .papers-wrapper{
     padding-bottom: 400px;
+    -webkit-transition: padding .3s;
     transition: padding .3s;
 }
 
@@ -37,11 +38,13 @@
 
 .paper-item.read-this .title a{
     font-size: 36px;
+    -webkit-transition: font-size .3s .4s, line-height .3s .4s;
     transition: font-size .3s .4s, line-height .3s .4s;
 }
 
 .papers-wrapper.will-return .paper-item .title a{
     font-size: 20px;
+    -webkit-transition: font-size .3s .1s, line-height .3s .1s;
     transition: font-size .3s .1s, line-height .3s .1s;
 }
 
@@ -74,6 +77,7 @@
 
 .papers-wrapper .paper-item .title{
     height: 29px;
+    -webkit-transition: height .3s;
     transition: height .3s;
 }
 
@@ -86,10 +90,12 @@
 }
 
 .papers-wrapper .paper-item{
+    -webkit-transition: height .3s, opacity .3s, padding .3s;
     transition: height .3s, opacity .3s, padding .3s;
 }
 
 .papers-wrapper .paper-item .summary-h{
+    -webkit-transition: height .3s, opacity .3s;
     transition: height .3s, opacity .3s;
 }
 
