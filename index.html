@@ -1,26 +1,217 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <title>test</title>
-    <link rel="stylesheet" href="layout/Reset.css"/>
-    <link rel="stylesheet" href="layout/style.css"/>
-    <link rel="stylesheet" href="layout/expDetailCon.css"/>
-    <script src="build/jquery.min.js"></script>
-    <script src="build/jquery-autoPlay.js"></script>
-    <script src="build/showdown.min.js"></script>
-    <script src="script/tool.js"></script>
-    <script src="script/main.js"></script>
-    <script src="build/react.js"></script>
-    <script src="build/react-dom.js"></script>
-    <!--<script src="build/JSXTransformer.js"></script>-->
-    <!--<script src="build/browser.min.js"></script>-->
+	<meta charset="UTF-8">
+	<title>OK记|移动版本/产品原型/界面</title>
 </head>
+
+<style>
+	body{
+		background: #303030;
+		margin: 0;
+		padding: 0;
+	}
+
+	.wrapper{
+		background: white;
+		width: 1080px;
+		margin: 0 auto;
+	}
+
+	.inner{
+		padding: 0 40px;
+	}
+
+	.top-info{
+
+	}
+
+	.top-info img{
+		height: 160px;
+	}
+
+	.item{
+		border-bottom: thin solid #ccc;
+		padding-top: 20px;
+		padding-bottom: 40px;
+	}
+
+	.demos-wrapper{
+		text-align: center;
+	}
+
+	.demo{
+		display: inline-block;
+		width: 300px;
+		padding: 20px 10px;
+		vertical-align: top;
+	}
+
+	.title{
+		/*text-align: left;*/
+	}
+
+	.intro{
+		display: inline-block;
+		height: 60px;
+		width: 100%;
+		text-align: left;
+		word-break: break-all;
+		white-space: normal;
+		text-overflow: ellipsis;
+	}
+
+	.line{
+		border-bottom: thin #ccc solid;
+	}
+</style>
+
 <body>
-    <div id="container"></div>
-    <!--<script type="text/babel" src="script/components/main.js"></script>-->
+	<div class="wrapper">
+		<div class="inner">
+			<!-- 标题栏 -->
+			<div class="top-info item">
+				<div class="con">
+					<h2>OK记手机版DEMO演示</h2>
+					<p>使用软件：Sketch&nbsp;&amp;&nbsp;Principle</p>
+					<p>制作人：谭靖纬</p>
+					<p>公司所属：长沙快智科技网络有限公司</p>
+				</div>
+			</div>
+			<!-- 视频原型 -->
+			<div class="prototype-video item">
+				<h2>视频原型</h2>
+				<div class="con">
+					<iframe src="https://player.vimeo.com/video/152150456" width="1000" height="562" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					<p>查看密码：505</p>
+				</div>
+			</div>
+			<!-- 结构思维导图 -->
+			<div class="mind-pic item">
+				<h2>思维导图</h2>
+				<div class="con">
+					<h3>功能1：与浏览器端同步</h3>
+					<h3>功能2：从手机端摘录</h3>
+					<p>具体功能与界面导图如下</p>
+					<div class="processon-link">
+						<a href="http://www.processon.com/view/link/5694dbcde4b0cfc27362d53b">here</a>
+						<p>查看密码：505</p>
+					</div>
+				</div>
+			</div>
+			<!-- 详细操作原型 -->
+			<div class="detail-demo item">
+				<h2>具体操作</h2>
+				<!-- 各demo -->
+				<div class="demos-wrapper">
 
-    <script src="script/components.js"></script>
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/main.webm" type="video/webm">
+						</video>
+						<h3 class="title">主页面</h3>
+						<div class="intro"></div>
+					</div>
 
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/memoMenu.webm" type="video/webm">
+						</video>
+						<h3 class="title">贴纸菜单操作</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/openMemo.webm" type="video/webm">
+						</video>
+						<h3 class="title">展开页面</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="line"></div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/syn.webm" type="video/webm">
+						</video>
+						<h3 class="title">同步</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/search.webm" type="video/webm">
+						</video>
+						<h3 class="title">搜索</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/leftSlide.webm" type="video/webm">
+						</video>
+						<h3 class="title">剪切板左滑</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="line"></div>
+
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/rightSlide.webm" type="video/webm">
+						</video>
+						<h3 class="title">剪切板右滑</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/createMemo.webm" type="video/webm">
+						</video>
+						<h3 class="title">新建贴纸</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/switchTag.webm" type="video/webm">
+						</video>
+						<h3 class="title">切换标签</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="line"></div>
+
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/editTag.webm" type="video/webm">
+						</video>
+						<h3 class="title">编辑标签</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/Settings.webm" type="video/webm">
+						</video>
+						<h3 class="title">菜单设置</h3>
+						<div class="intro"></div>
+					</div>
+
+					<div class="demo">
+						<video controls width="300" preload="auto" loop onclick="this.paused?this.play():this.pause();">
+							<source src="video/login.webm" type="video/webm">
+						</video>
+						<h3 class="title">登录|注册</h3>
+						<div class="intro"></div>
+					</div>
+
+				</div>
+			</div>
+		</div><!-- .inner -->
+	</div>
 </body>
 </html>
