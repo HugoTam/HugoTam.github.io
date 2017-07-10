@@ -179,9 +179,55 @@
 			box-shadow: 0 14px 36px -4px rgba(0,0,0,.4)
 
 		}
+		
+		/*检测是手机*/
+
+		/*yys宽度变100%*/
+		.is-phone .others .yys-wrapper .img-con{
+			width: 100%;
+		}
+
+		.is-phone .ok-exp-wrapper{
+			display: none;
+		}
+
+		.tmp-phone-run{
+			background: #fff;
+		    width: 666px;
+		    box-shadow: 0 10px 16px -4px rgba(0,0,0,.4);
+		    margin: 40px auto;
+		    padding: 64px 80px;
+		    text-align: center;
+		    font-size: 16px;
+		    border-radius: 8px;
+		}
+
+		.tmp-phone-run b{
+			color: #90D8FE;
+		}
+
+		body.is-phone .tmp-phone-run{
+			display: block;
+		}
+		
+		body .tmp-phone-run{
+			display: none;
+		}
+
+
+
 	</style>
 </head>
 <body>
+	<div class="tmp-phone-run">
+		<img src="images/tamyeah.png" alt="">
+		<p>我是谭什么</p>
+		<p>欢迎来到我的作品集</p>
+		<p>请使用 <b>电脑访问</b> 发现我的更多经历</p>
+		<p>移动端正在适配中......</p>
+		<p>谢谢:)</p>
+
+	</div>
 	<div class="ok-exp-wrapper">
 		<div class="gallery">
 			<div class="page">
