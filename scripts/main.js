@@ -48,6 +48,8 @@ window.onload = function(){
 
 	});
 
+	console.log("gif loaded.");
+
 
 
 };
