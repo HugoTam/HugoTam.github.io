@@ -33,3 +33,8 @@ jQuery(function($){
 
 
 });
+
+window.onload = function(){
+	// 等图片加载完，再加载gif
+	$(".gif-wrapper img").addClass("show");
+};
