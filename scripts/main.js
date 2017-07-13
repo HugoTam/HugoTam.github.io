@@ -28,13 +28,26 @@ jQuery(function($){
 	});
 
 	console.log("run");
-	
-
 
 
 });
 
+
 window.onload = function(){
+
+
 	// 等图片加载完，再加载gif
-	$(".gif-wrapper img").addClass("show");
+	$(".gif-wrapper").addClass("show");
+
+	$(".gif-wrapper .gif").each(function(){
+		// console.log($(this));
+		var $this = $(this);
+
+		$this.attr("src",$this.attr("alt"));
+
+
+	});
+
+
+
 };

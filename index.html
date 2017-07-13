@@ -166,12 +166,26 @@
 		    z-index: 99;*/
 		}
 
-		.gif-wrapper img{
-			display: none;
+
+/*
+		.gif-wrapper .loading-gif{
+			width: 400px;
+			padding: 100px 200px;
+		}*/
+		
+		.gif-wrapper .gif{
+			-webkit-transition: padding .38s, width .38s;
+			transition: padding .38s, width .38s;
+		    width: 300px;
+		    padding: 120px 140px;
+		    margin: 0 auto;
+		    display: block;
 		}
 
-		.gif-wrapper img.show{
-			display: inline-block;
+
+		.gif-wrapper.show .gif{
+			width: 100%;
+			padding: 0;
 		}
 
 		.gif-wrapper{
@@ -183,7 +197,7 @@
 			width: 700px;
 		}
 
-		.gif-wrapper.function-gif{
+		.gif-wrapper.function-gif.show{
 			width: 540px;
 		}
 
@@ -195,7 +209,7 @@
 		}
 
 		.uxpa-wrapper .gif-wrapper img{
-			width: 100%;
+			/*width: 100%;*/
 			border-radius: 12px;
 			box-shadow: 0 14px 36px -4px rgba(0,0,0,.4)
 
@@ -445,11 +459,13 @@
 			<div class="img-con">
 				<img src="images/xzcsh01.png" alt="">
 				<div class="function-gif gif-wrapper">
-					<img src="images/function.gif" alt="">
+					<img class="gif" alt="images/function.gif" src="images/Loading_icon.gif">
+					<!-- <img class="loading-gif" src="images/Loading_icon.gif" alt=""> -->
 				</div>
 				<img src="images/xzcsh02.png" alt="">
 				<div class="five-menu-gif gif-wrapper">
-					<img src="images/five_menu.gif" alt="">
+					<img class="gif" alt="images/five_menu.gif" src="images/Loading_icon.gif">
+					<!-- <img class="loading-gif" src="images/Loading_icon.gif" alt=""> -->
 				</div>
 				<img src="images/xzcsh03.png" alt="">
 			</div>
