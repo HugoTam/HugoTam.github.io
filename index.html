@@ -167,9 +167,16 @@
 		}
 
 		.gif-wrapper{
-			width: 540px;
 			margin: 0 auto;
 			padding: 20px 0 70px;
+		}
+
+		.gif-wrapper.five-menu-gif{
+			width: 700px;
+		}
+
+		.gif-wrapper.function-gif{
+			width: 540px;
 		}
 
 		.uxpa-wrapper .img-con{
@@ -222,7 +229,19 @@
 			display: block;
 		}
 		
+		/*flickity css*/
+		.flickity-prev-next-button{
+			cursor: pointer;
+			box-shadow: 0 4px 16px #d0d0d0;
+		}
+
+		.flickity-prev-next-button:hover{
+			background: #e8e8e8;
+		}
 		
+		.flickity-prev-next-button:hover .arrow{
+			/*fill: #fff;*/
+		}
 
 
 
@@ -408,20 +427,19 @@
 				<img src="images/yys02.png" alt="">
 				<img src="images/yys03.png" alt="">
 				<img src="images/yys04.png" alt="">
-				<!-- <img src="images/yys.png" alt=""> -->
-				<!-- <div class="images-yys yys01"></div>
-				<div class="images-yys yys02"></div>
-				<div class="images-yys yys03"></div>
-				<div class="images-yys yys04"></div> -->
 			</div>
 		</div>
 		<div class="uxpa-wrapper">
 			<div class="img-con">
 				<img src="images/xzcsh01.png" alt="">
-				<div class="gif-wrapper">
+				<div class="function-gif gif-wrapper">
 					<img src="images/function.gif" alt="">
 				</div>
 				<img src="images/xzcsh02.png" alt="">
+				<div class="five-menu-gif gif-wrapper">
+					<img src="images/five_menu.gif" alt="">
+				</div>
+				<img src="images/xzcsh03.png" alt="">
 			</div>
 		</div>
 	</div>
