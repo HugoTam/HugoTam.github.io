@@ -29,6 +29,12 @@ jQuery(function($){
 
 	console.log("run");
 
+	// 点击下滑
+	var $scrollBtn = $(".arrow-down-btn");
+	$scrollBtn.on("click", function(){
+		console.log("click run");
+		$("body").animate({"scrollTop":760},486);
+	});
 
 });
 
