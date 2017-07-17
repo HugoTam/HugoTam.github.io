@@ -119,13 +119,13 @@
 			width: 100%;
 		}
 		
-		.others .yys-wrapper{
+		.yys-wrapper{
 			width: 100%;
 			display: inline-block;
 			background: #fdfdfd;
 		}
 
-		.others .yys-wrapper .intro{
+		.yys-wrapper .intro{
 			background: #fff;
 		    width: 666px;
 		    box-shadow: 0 10px 16px -4px rgba(0,0,0,.4);
@@ -134,17 +134,17 @@
 		    text-align: center
 		}
 
-		.others .yys-wrapper .intro .bg-title{
+		.yys-wrapper .intro .bg-title{
 			width: 500px;
 		}
 
-		.others .yys-wrapper .intro h2{
+		.yys-wrapper .intro h2{
 		    margin: 100px 0 180px;
 		    font-weight: normal;
 		    font-size: 24px;
 		}
 
-		.others .yys-wrapper .intro p{
+		.yys-wrapper .intro p{
 			width: 440px;
 			color: #333;
 		    display: block;
@@ -153,22 +153,29 @@
 		    line-height: 1.8;
 		}
 
-		.others .yys-wrapper .img-con{
+		.yys-wrapper .img-con{
 			width: 374px;
 			margin: 120px auto;
 			box-shadow: 0 10px 16px -4px rgba(0,0,0,.4);
 		}
 
 
-		.others .yys-wrapper .img-con img{
+		.yys-wrapper .img-con img{
 			display: block;
 			width: 100%;
+		}
+
+		.ok-show-wrapper{
+			width: 100%;
+			background: #333;
+			padding: 16px 0;
 		}
 
 		.uxpa-wrapper{
 			/*position: relative;*/
 			width: 100%;
-			display: inline-block;
+			padding: 16px 0;
+			/*display: inline-block;*/
 			background: #fef036;
 		}
 
@@ -213,14 +220,16 @@
 			width: 540px;
 		}
 
-		.uxpa-wrapper .img-con{
+		.uxpa-wrapper .img-con,
+		.ok-show-wrapper .img-con{
 			width: 855px;
 			background: #fff;
 			margin: 120px auto;
 			box-shadow: 0 10px 16px -4px rgba(0,0,0,.4);
 		}
 
-		.uxpa-wrapper .img-con .xzcsh-img{
+		.uxpa-wrapper .img-con .xzcsh-img,
+		.ok-show-wrapper .img-con .ok-img{
 			display: block;
 		}
 
@@ -514,6 +523,12 @@
 	</div>
 
 	<div class="others">
+		<!-- OK记截屏部分展示 -->
+		<div class="ok-show-wrapper">
+			<div class="img-con">
+				<img class="ok-img" src="images/ok01.png" alt="">
+			</div>
+		</div>
 		<!-- xzcsh -->
 		<div class="uxpa-wrapper">
 			<div class="img-con">
