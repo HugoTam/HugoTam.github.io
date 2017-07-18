@@ -294,24 +294,24 @@
 			/*fill: #fff;*/
 		}
 
-		 /*popup*/
-		 .popup{
-		 	position: fixed;
-    bottom: 0;
-    width: 100%;
-    /* margin: 0 auto; */
-    /* height: 400px; */
-    text-align: center;
+		/*popup*/
+		.popup{
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			/* margin: 0 auto; */
+			/* height: 400px; */
+			text-align: center;
 
-		 }
+		}
 
-		 .popup .tips-flow-firing{
-		 	position: fixed; */
-    display: inline-block;
-    /* width: 500px; */
-    padding: 20px 100px;
-    /* bottom: 10px; */
-    background: #fff;
+		.popup .tips-flow-firing{
+			position: fixed; */
+			display: inline-block;
+			/* width: 500px; */
+			padding: 20px 100px;
+			/* bottom: 10px; */
+			background: #fff;
 
 		 }
 
@@ -326,13 +326,14 @@
 		    width: 666px;
 		    box-shadow: 0 10px 16px -4px rgba(0,0,0,.4);
 		    margin: 0 auto;
-		    padding: 64px 40px;
+		    padding: 24px 0px;
+		    /*padding-bottom: 20px;*/
 		    text-align: center;
 		    font-size: 20px;
 		    border-radius: 8px;
 		 }
 
-		 .contact-me-wrapper .contact-me-inner h1{
+		 .contact-me-wrapper .p-con h1{
 		 	font-size: 28px;
 		 	font-family: STZhongsong;
 		 	padding: 0;
@@ -340,16 +341,32 @@
 		 	margin-bottom: 16px;
 		 }
 
-		 .contact-me-wrapper .contact-me-inner p{
+		 .contact-me-wrapper .p-con h2{
+		 	padding: 0;
+		 	margin: 0;
+		 	/*font-weight: 600;*/
+    		color: #03A9F4;
+    		font-size: 18px;
+		    padding: 0;
+		    margin: 0;
+		    margin-bottom: 6px;
+		 }
+
+		 .contact-me-wrapper .p-con p{
 		 	font-size: 18px;
 		 	padding: 0;
 		 	margin: 0;
-		 	margin-bottom: 6px;
 		 }
 
-		.contact-me-wrapper .contact-me-inner img{
+		.contact-me-wrapper .p-con img{
 		 	width: 160px;
 		 	margin-bottom: 12px;
+		 }
+
+		 .contact-me-wrapper .hot-img-con img{
+		 	width: 666px;
+		 	margin-bottom: 12px;
+		 	box-shadow: 0px 0px 8px -2px #05b3da;
 		 }
 
 
@@ -564,11 +581,19 @@
 
 	<div class="contact-me-wrapper">
 		<div class="contact-me-inner">
-			<h1>联系我</h1>
-			<p>微信</p>
-			<img src="images/QR_code.png" alt="微信二维码">
-			<p>手机</p>
-			<p>18620293384</p>
+			<div class="p-con">
+				<h1>联系我</h1>
+			</div>
+
+			<div class="hot-img-con">
+				<img src="images/hotland_me.png" alt="">
+			</div>
+			<div class="p-con">
+				<h2>微信</h2>
+				<img src="images/QR_code.png" alt="微信二维码">
+				<h2>手机</h2>
+				<p>18620293384</p>
+			</div>
 		</div>
 	</div>
 
